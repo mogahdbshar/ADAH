@@ -1,8 +1,9 @@
-const $=s=>document.querySelector(s),$=s=>[...document.querySelectorAll(s)];\nconst safeText=(value)=>String(value??'');
+const $=s=>document.querySelector(s),$=s=>[...document.querySelectorAll(s)];
 $('#year').textContent=new Date().getFullYear();
 let currentFilter='all';
 function filterTools(){const q=$('#searchInput').value.trim().toLowerCase();let count=0;$$('.tool-card').forEach(card=>{const ok=(currentFilter==='all'||card.dataset.category===currentFilter)&&(!q||(card.dataset.search+' '+card.innerText).toLowerCase().includes(q));card.hidden=!ok;if(ok)count++});$('#emptyState').hidden=count!==0;$('#toolCount').textContent=String(count).padStart(2,'0')}
-$('#searchInput').addEventListener('input',filterTools);\n$('#searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#tools').scrollIntoView({behavior:'smooth',block:'start'})});
+$('#searchInput').addEventListener('input',filterTools);
+$('#searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#tools').scrollIntoView({behavior:'smooth',block:'start'})});
 $$('.filter').forEach(b=>b.addEventListener('click',()=>{$$('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentFilter=b.dataset.filter;filterTools()}));
 const modal=$('#modal'),body=$('#toolBody');
 function openTool(id){const templates={
@@ -25,7 +26,8 @@ function showToast(message){let toast=$('#appToast');if(!toast){toast=document.c
 $$('.open-tool').forEach(b=>b.addEventListener('click',()=>openTool(b.dataset.tool)));
 $('#closeModal').onclick=()=>{modal.hidden=true;document.body.style.overflow=''};modal.addEventListener('click',e=>{if(e.target===modal)$('#closeModal').click()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)$('#closeModal').click();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('#searchInput').focus()}});
 // Language switching is intentionally omitted until a complete translated interface is available; a partial toggle mislabels Arabic content.
-if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));\nwindow.addEventListener('online',()=>showToast('عاد الاتصال بالإنترنت'));window.addEventListener('offline',()=>showToast('أنت غير متصل. الأدوات المحلية ما زالت متاحة'));
+if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+window.addEventListener('online',()=>showToast('عاد الاتصال بالإنترنت'));window.addEventListener('offline',()=>showToast('أنت غير متصل. الأدوات المحلية ما زالت متاحة'));
 const searchGo=document.getElementById('searchGo');
 if(searchGo)searchGo.addEventListener('click',()=>{document.getElementById('searchInput').focus();document.getElementById('tools').scrollIntoView({behavior:'smooth',block:'start'})});
 const themeBtn=document.getElementById('themeBtn');
