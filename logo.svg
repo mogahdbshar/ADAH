@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="ADAH">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#32131f"/><stop offset=".58" stop-color="#130e14"/><stop offset="1" stop-color="#08090c"/></linearGradient><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0f1"/><stop offset=".38" stop-color="#e99aa8"/><stop offset=".72" stop-color="#a92d49"/><stop offset="1" stop-color="#f4c4ca"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect x="4" y="4" width="120" height="120" rx="29" fill="url(#bg)" stroke="#a8445b" stroke-width="2"/>
+<path d="M64 17 103 99H82L74 81H52L44 99H24L64 17Z" fill="none" stroke="url(#metal)" stroke-width="7" stroke-linejoin="round" filter="url(#glow)"/>
+<path d="M53 65h22" stroke="#f7d6db" stroke-width="5" stroke-linecap="round"/>
+<path d="M64 17v-5M109 64h6M19 64h-6" stroke="#e66b82" stroke-width="2" stroke-linecap="round"/>
+<circle cx="64" cy="64" r="53" fill="none" stroke="#e56a80" stroke-opacity=".22"/>
+</svg>
