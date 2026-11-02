@@ -25,3 +25,7 @@ $$('.open-tool').forEach(b=>b.addEventListener('click',()=>openTool(b.dataset.to
 $('#closeModal').onclick=()=>{modal.hidden=true;document.body.style.overflow=''};modal.addEventListener('click',e=>{if(e.target===modal)$('#closeModal').click()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)$('#closeModal').click();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('#searchInput').focus()}});
 $('#langBtn').onclick=()=>{const en=document.documentElement.lang==='en';document.documentElement.lang=en?'ar':'en';document.documentElement.dir=en?'rtl':'ltr';$('#langBtn').textContent=en?'EN':'AR';$('#searchInput').placeholder=en?'ابحث عن الأداة التي تحتاجها...':'Search for a tool...'};
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+const searchGo=document.getElementById('searchGo');
+if(searchGo)searchGo.addEventListener('click',()=>{document.getElementById('searchInput').focus();document.getElementById('tools').scrollIntoView({behavior:'smooth',block:'start'})});
+const themeBtn=document.getElementById('themeBtn');
+if(themeBtn)themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light-theme');themeBtn.textContent=document.body.classList.contains('light-theme')?'☾':'☼'});
