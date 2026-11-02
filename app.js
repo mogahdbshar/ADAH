@@ -1,4 +1,4 @@
-const $=s=>document.querySelector(s),$=s=>[...document.querySelectorAll(s)];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 $('#year').textContent=new Date().getFullYear();
 let currentFilter='all';
 function filterTools(){const q=$('#searchInput').value.trim().toLowerCase();let count=0;$$('.tool-card').forEach(card=>{const ok=(currentFilter==='all'||card.dataset.category===currentFilter)&&(!q||(card.dataset.search+' '+card.innerText).toLowerCase().includes(q));card.hidden=!ok;if(ok)count++});$('#emptyState').hidden=count!==0;$('#toolCount').textContent=String(count).padStart(2,'0')}
