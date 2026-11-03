@@ -1,1 +1,27 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="styles.css"><title>الصفحة غير موجودة | أداة</title></head><body><main class="wrap" style="text-align:center;padding:18vh 0"><div class="brand-mark" style="margin:auto">أ</div><h1 style="font-size:64px;color:#ed526b">404</h1><h2>هذه الصفحة غير موجودة</h2><p style="color:#ad9fa5">يبدو أن الرابط غير صحيح أو أن الصفحة انتقلت.</p><a class="top-cta" href="index.html" style="display:inline-block;margin-top:20px">العودة إلى الرئيسية</a></main></body></html>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050507">
+<meta name="robots" content="noindex,follow">
+<title>الصفحة غير موجودة | ADAH</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<style>
+.error-page{min-height:75vh;display:grid;place-items:center;text-align:center;padding-block:70px}
+.error-code{font:800 clamp(90px,18vw,190px)/.9 Manrope,sans-serif;color:#ed173b;text-shadow:0 0 55px #ed173b55}
+.error-page h1{font-size:clamp(24px,4vw,38px);margin:24px 0 10px}
+.error-page p{color:#b9aaae;line-height:1.9}
+.error-page .tool-btn{display:inline-flex;margin-top:20px}
+</style>
+</head>
+<body>
+<header class="topbar wrap"><a class="brand" href="index.html"><span class="brand-mark"><img src="logo.svg" alt=""></span><span class="brand-lockup"><b>أَدَاة</b><small>ADAH</small></span></a></header>
+<main class="wrap error-page">
+<div><div class="error-code">404</div><h1>هذه الصفحة غير موجودة</h1><p>قد يكون الرابط غير صحيح أو أن الصفحة نُقلت.</p><a class="tool-btn" href="index.html">العودة إلى الرئيسية</a></div>
+</main>
+<footer><div class="wrap footer-inner"><a class="brand" href="index.html"><span class="brand-lockup"><b>أَدَاة</b><small>ADAH</small></span></a><small>© <span id="year"></span> ADAH</small></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>

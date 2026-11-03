@@ -61,3 +61,81 @@ body{background:radial-gradient(ellipse at 78% 12%,rgba(133,12,39,.19),transpare
 @media(prefers-reduced-transparency:reduce){.tool-card,.feature-card,.stats-bar,.modal,.topbar{backdrop-filter:none;background:#171116}}
 
 .category-page{min-height:65vh;padding-top:36px;padding-bottom:90px}.back-link{display:inline-flex;margin:10px 0 30px;color:var(--muted);text-decoration:none}.category-page h1{font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;margin:16px 0}.category-lead{color:var(--muted);max-width:650px;line-height:2;margin-bottom:34px}.category-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.category-cards .tool-card{display:block}.category-note{margin-top:48px;padding:28px;border:1px solid rgba(255,255,255,.14);border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.02));backdrop-filter:blur(20px)}.category-note p{color:var(--muted);line-height:2}.category-note .tool-btn{display:inline-flex;text-decoration:none;margin-top:10px}.tool-btn.secondary{color:inherit;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:8px 14px}.top-actions .tool-btn{margin:0}@media(max-width:700px){.category-cards{grid-template-columns:1fr}.category-page{padding-top:20px}.category-note{padding:22px}.topbar nav{overflow-x:auto;white-space:nowrap}}
+
+/* ADAH category directory and interaction accessibility */
+.category-directory-grid{grid-template-columns:repeat(4,minmax(0,1fr));width:100%;margin:32px auto 0}
+.category-directory-grid .feature-card{min-height:150px;padding:18px;background:linear-gradient(145deg,#2a1b21d9,#100b0ff2 76%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.category-directory-grid .feature-card:focus-visible,
+.topbar a:focus-visible,.footer-links a:focus-visible,.social-links a:focus-visible,
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,
+.tool-btn:focus-visible,.filter:focus-visible{outline:2px solid #ff7188;outline-offset:3px}
+button:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:900px){.category-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.category-directory-grid{gap:9px}.category-directory-grid .feature-card{min-height:125px;padding:12px}.category-directory-grid .feature-card b{font-size:13px}.category-directory-grid .feature-card small{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* ADAH unified 1.0 interface layer */
+.icon{width:21px;height:21px;display:block;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tool-icon .icon,.feature-icon .icon{width:27px;height:27px}
+.hero-search button .icon{width:23px;height:23px;margin:auto}
+.social-links{display:flex;align-items:center;gap:12px}
+.social-links a{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--glass-border);border-radius:50%;background:rgba(255,255,255,.045);color:#d7c4ca;transition:background .2s,border-color .2s,color .2s}
+.social-links a:hover{background:rgba(224,25,62,.2);border-color:#e94b68;color:#fff}
+.social-links .icon{width:18px;height:18px}
+.brand-credit{color:#b78a95;font:600 10px Manrope;letter-spacing:2px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:22px}
+.footer-links{display:flex;align-items:center;flex-wrap:wrap;gap:clamp(12px,2vw,28px)}
+.footer-links a,.topbar nav a{transition:color .18s ease}
+.footer-links a:hover,.topbar nav a:hover{color:#ff6680}
+.filters{gap:8px}
+.filter{min-height:42px;padding:10px 15px;white-space:nowrap}
+.filter:disabled{opacity:.38;cursor:not-allowed;text-decoration:line-through}
+.tool-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.tool-grid .tool-card{min-height:270px;padding:25px;display:flex;flex-direction:column;align-items:flex-start}
+.tool-grid .card-top{width:100%}
+.tool-grid .card-tag{margin-top:22px}
+.tool-grid .tool-card h3{font-size:21px;letter-spacing:-.3px}
+.tool-grid .tool-card p{max-width:34ch;line-height:2}
+.tool-grid .open-tool{margin-top:auto;padding-top:22px;position:relative;z-index:1}
+.tool-grid .card-number{font-size:12px;opacity:.7}
+.tool-grid .tool-card[hidden]{display:none!important}
+.categories-directory{padding-top:42px}
+.category-directory-grid .feature-card{min-height:164px;gap:11px}
+.category-directory-grid .feature-icon{width:52px;height:52px;display:grid;place-items:center;border:1px solid rgba(255,117,145,.25);border-radius:16px;background:rgba(219,27,67,.1);color:#ff849a}
+.category-directory-grid .feature-card b{font-size:15px}
+.category-directory-grid .feature-card small{text-align:center}
+.category-directory-grid .feature-card[href="#all-categories"]{cursor:default}
+.category-directory-grid .feature-card[href="#all-categories"]:hover{transform:none;border-color:var(--glass-border)}
+button,.tool-btn,.filter,.social-links a,.feature-card,.tool-card{ -webkit-tap-highlight-color:transparent}
+button:active,.tool-btn:active,.filter:not(:disabled):active{transform:translateY(1px) scale(.99)}
+button:disabled{filter:saturate(.4)}
+@media(max-width:900px){.tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-inner{justify-content:center;text-align:center}.footer-links{justify-content:center}}
+@media(max-width:560px){.tool-grid{grid-template-columns:1fr}.tool-grid .tool-card{min-height:220px;padding:21px}.footer-inner{gap:15px}.footer-links{width:100%;gap:12px 18px}.social-links{margin-inline:auto}.filters{flex-wrap:nowrap;overflow-x:auto;padding:3px 2px 10px;scrollbar-width:thin}.filter{flex:none}}
+
+
+/* Honest availability states and consistent category icon placement */
+.category-directory-grid .feature-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none;color:inherit}
+.category-directory-grid .feature-card.is-unavailable{opacity:.58;cursor:not-allowed;filter:saturate(.65)}
+.category-directory-grid .feature-card.is-unavailable:hover{transform:none;border-color:var(--glass-border);box-shadow:none}
+.category-directory-grid .feature-card.is-unavailable small{color:var(--muted)}
+.stats-bar .icon{width:22px;height:22px;margin:auto}
+.stats-bar b{display:grid;place-items:center}
+.tool-grid .card-tag{color:var(--accent,#f16a83)}
+.filter.active{border-color:rgba(240,85,117,.55)}
+.filter:disabled{text-decoration:none}
+
+
+/* Tool action groups */
+.tool-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px}
+.tool-actions .tool-btn{min-width:112px}
+.tool-actions .tool-btn.secondary{min-height:42px}
+.category-cards .tool-card .card-tag{color:var(--accent,#f16a83)}
+@media(max-width:520px){.tool-actions{display:grid;grid-template-columns:1fr 1fr}.tool-actions .tool-btn{width:100%;justify-content:center}}
+
+
+/* Language control */
+.language-switch{white-space:nowrap;min-width:78px;direction:ltr}
+html[dir="ltr"] body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+html[dir="ltr"] .brand-lockup,html[dir="ltr"] .brand-mark{direction:ltr}
+html[dir="ltr"] .back-link{direction:ltr}
