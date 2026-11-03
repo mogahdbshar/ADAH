@@ -60,7 +60,12 @@ if(searchGo)searchGo.addEventListener('click',()=>{document.getElementById('sear
   {title:'المساعدة والأسئلة الشائعة',desc:'إجابات حول استخدام المنصة',terms:'help faq support',kind:'link',url:'help.html'},
   {title:'سياسة الخصوصية',desc:'كيفية التعامل مع البيانات',terms:'privacy data',kind:'link',url:'privacy.html'},
   {title:'شروط الاستخدام',desc:'قواعد استخدام المنصة',terms:'terms conditions',kind:'link',url:'terms.html'},
-  {title:'خريطة الموقع',desc:'استعراض صفحات وأقسام ADAH',terms:'sitemap pages',kind:'link',url:'sitemap.html'}
+  {title:'خريطة الموقع',desc:'استعراض صفحات وأقسام ADAH',terms:'sitemap pages',kind:'link',url:'sitemap.html'},
+  {title:'تغيير أبعاد الصورة',desc:'تغيير أبعاد الصور محلياً',terms:'image resize pictures',kind:'tool',id:'image'},
+  {title:'بصمة الملفات',desc:'حساب بصمة SHA-256 وSHA-384 وSHA-512',terms:'file hash checksum',kind:'tool',id:'filehash'},
+  {title:'ترميز Base64',desc:'ترميز وفك ترميز النصوص',terms:'base64 encode decode',kind:'tool',id:'base64'},
+  {title:'تحويل حالة النص',desc:'تحويل الأحرف وترتيب النص',terms:'text case converter',kind:'tool',id:'textcase'}
+
  ];
  const panel=document.createElement('div');panel.className='global-search-results';panel.id='globalSearchResults';panel.hidden=true;host.insertAdjacentElement('afterend',panel);
  const render=()=>{const q=normalizeSearch(input.value);panel.replaceChildren();if(!q){panel.hidden=true;return}
