@@ -1,4 +1,4 @@
-const CACHE='adah-static-v8';
+const CACHE='adah-static-v9';
 const ASSETS=['./','./index.html','./styles.css','./app.js','./favicon.svg','./icons.svg','./logo.svg','./manifest.webmanifest','./text-tools.html','./utility-tools.html','./security-tools.html','./privacy.html','./terms.html','./404.html','./about.html','./help.html','./sitemap.html'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('adah-static-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
