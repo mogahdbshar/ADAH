@@ -112,3 +112,15 @@ button:active,.tool-btn:active,.filter:not(:disabled):active{transform:translate
 button:disabled{filter:saturate(.4)}
 @media(max-width:900px){.tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-inner{justify-content:center;text-align:center}.footer-links{justify-content:center}}
 @media(max-width:560px){.tool-grid{grid-template-columns:1fr}.tool-grid .tool-card{min-height:220px;padding:21px}.footer-inner{gap:15px}.footer-links{width:100%;gap:12px 18px}.social-links{margin-inline:auto}.filters{flex-wrap:nowrap;overflow-x:auto;padding:3px 2px 10px;scrollbar-width:thin}.filter{flex:none}}
+
+
+/* Honest availability states and consistent category icon placement */
+.category-directory-grid .feature-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none;color:inherit}
+.category-directory-grid .feature-card.is-unavailable{opacity:.58;cursor:not-allowed;filter:saturate(.65)}
+.category-directory-grid .feature-card.is-unavailable:hover{transform:none;border-color:var(--glass-border);box-shadow:none}
+.category-directory-grid .feature-card.is-unavailable small{color:var(--muted)}
+.stats-bar .icon{width:22px;height:22px;margin:auto}
+.stats-bar b{display:grid;place-items:center}
+.tool-grid .card-tag{color:var(--accent,#f16a83)}
+.filter.active{border-color:rgba(240,85,117,.55)}
+.filter:disabled{text-decoration:none}
