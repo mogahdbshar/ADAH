@@ -1,7 +1,7 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 if($('#year'))$('#year').textContent=new Date().getFullYear();
 let currentFilter='all';
-function filterTools(){if(!$('#searchInput'))return;const q=$('#searchInput').value.trim().toLowerCase();let count=0;$$('.tool-card').forEach(card=>{const ok=(currentFilter==='all'||card.dataset.category===currentFilter)&&(!q||(card.dataset.search+' '+card.innerText).toLowerCase().includes(q));card.hidden=!ok;if(ok)count++});$('#emptyState').hidden=count!==0;$('#toolCount').textContent=String(count).padStart(2,'0')}
+function filterTools(){if(!$('#searchInput'))return;const q=$('#searchInput').value.trim().toLowerCase();let count=0;$$('.tool-card').forEach(card=>{const ok=(currentFilter==='all'||(currentFilter==='utility'?card.dataset.category==='utility':card.dataset.category===currentFilter))&&(!q||(card.dataset.search+' '+card.innerText).toLowerCase().includes(q));card.hidden=!ok;if(ok)count++});$('#emptyState').hidden=count!==0;$('#toolCount').textContent=String(count).padStart(2,'0')}
 if($('#searchInput'))$('#searchInput').addEventListener('input',filterTools);
 if($('#searchInput'))$('#searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#tools')?.scrollIntoView({behavior:'smooth',block:'start'})});
 $$('.filter[data-filter]').forEach(b=>b.addEventListener('click',()=>{$$('.filter[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentFilter=b.dataset.filter;filterTools()}));
@@ -31,7 +31,7 @@ window.addEventListener('online',()=>showToast('عاد الاتصال بالإن
 const searchGo=document.getElementById('searchGo');
 if(searchGo)searchGo.addEventListener('click',()=>{document.getElementById('searchInput').focus();document.getElementById('tools').scrollIntoView({behavior:'smooth',block:'start'})});
 const themeBtn=document.getElementById('themeBtn');
-if(themeBtn){let savedTheme='dark';try{savedTheme=localStorage.getItem('adah-theme')||'dark'}catch{}if(savedTheme==='light')document.body.classList.add('light-theme');const syncTheme=()=>{const light=document.body.classList.contains('light-theme');themeBtn.textContent=light?'☾':'☼';themeBtn.setAttribute('aria-label',light?'تفعيل المظهر الداكن':'تفعيل المظهر الفاتح')};syncTheme();themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light-theme');try{localStorage.setItem('adah-theme',document.body.classList.contains('light-theme')?'light':'dark')}catch{}syncTheme()})}
+if(themeBtn){let savedTheme='dark';try{savedTheme=localStorage.getItem('adah-theme')||'dark'}catch{}if(savedTheme==='light')document.body.classList.add('light-theme');const syncTheme=()=>{const light=document.body.classList.contains('light-theme');themeBtn.innerHTML='<svg class="icon"><use href="icons.svg#i-'+(light?'moon':'sun')+'"/></svg>';themeBtn.setAttribute('aria-label',light?'تفعيل المظهر الداكن':'تفعيل المظهر الفاتح')};syncTheme();themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light-theme');try{localStorage.setItem('adah-theme',document.body.classList.contains('light-theme')?'light':'dark')}catch{}syncTheme()})}
 
 /* Deep links make every tool directly addressable and shareable. */
 const params=new URLSearchParams(location.search);
