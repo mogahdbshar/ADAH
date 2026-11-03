@@ -31,6 +31,40 @@ if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addE
 window.addEventListener('online',()=>showToast('عاد الاتصال بالإنترنت'));window.addEventListener('offline',()=>showToast('أنت غير متصل. الأدوات المحلية ما زالت متاحة'));
 const searchGo=document.getElementById('searchGo');
 if(searchGo)searchGo.addEventListener('click',()=>{document.getElementById('searchInput').focus();document.getElementById('tools').scrollIntoView({behavior:'smooth',block:'start'})});
+
+/* Unified site search: tools, categories and public information pages. */
+(function(){
+ const input=document.getElementById('searchInput'),host=document.querySelector('.hero-search');
+ if(!input||!host)return;
+ const entries=[
+  {title:'عداد الكلمات',desc:'حساب الكلمات والحروف ووقت القراءة',terms:'word counter text characters',kind:'tool',id:'counter'},
+  {title:'منسّق JSON',desc:'تنسيق JSON والتحقق من صحة البيانات',terms:'json formatter developer data',kind:'tool',id:'json'},
+  {title:'مولّد كلمات المرور',desc:'إنشاء كلمات مرور قوية وآمنة',terms:'password generator security',kind:'tool',id:'password'},
+  {title:'الحاسبة السريعة',desc:'عمليات الجمع والطرح والضرب والقسمة',terms:'calculator math حساب',kind:'tool',id:'calculator'},
+  {title:'محول الوحدات',desc:'تحويل الطول والوزن ودرجة الحرارة',terms:'unit converter length weight temperature',kind:'tool',id:'convert'},
+  {title:'حاسبة العمر',desc:'حساب العمر من تاريخ الميلاد',terms:'age calculator birthday',kind:'tool',id:'age'},
+  {title:'النصوص والكتابة',desc:'أدوات الكتابة ومعالجة النصوص',terms:'writing text',kind:'link',url:'text-tools.html'},
+  {title:'الحساب والتحويل',desc:'الحاسبة ومحول الوحدات وحساب العمر',terms:'calculation conversion',kind:'link',url:'utility-tools.html'},
+  {title:'الأمان والخصوصية',desc:'أدوات حماية الخصوصية وكلمات المرور',terms:'security privacy',kind:'link',url:'security-tools.html'},
+  {title:'عن ADAH',desc:'رؤية المنصة ومبادئها',terms:'about platform',kind:'link',url:'about.html'},
+  {title:'المساعدة والأسئلة الشائعة',desc:'إجابات حول استخدام المنصة',terms:'help faq support',kind:'link',url:'help.html'},
+  {title:'سياسة الخصوصية',desc:'كيفية التعامل مع البيانات',terms:'privacy data',kind:'link',url:'privacy.html'},
+  {title:'شروط الاستخدام',desc:'قواعد استخدام المنصة',terms:'terms conditions',kind:'link',url:'terms.html'},
+  {title:'خريطة الموقع',desc:'استعراض صفحات وأقسام ADAH',terms:'sitemap pages',kind:'link',url:'sitemap.html'}
+ ];
+ const panel=document.createElement('div');panel.className='global-search-results';panel.id='globalSearchResults';panel.hidden=true;host.insertAdjacentElement('afterend',panel);
+ const render=()=>{const q=normalizeSearch(input.value);panel.replaceChildren();if(!q){panel.hidden=true;return}
+  const matches=entries.filter(item=>normalizeSearch([item.title,item.desc,item.terms].join(' ')).includes(q)).slice(0,8);
+  panel.hidden=false;
+  if(!matches.length){const empty=document.createElement('p');empty.className='global-search-empty';empty.textContent='لا توجد نتائج مطابقة';panel.append(empty);return}
+  const heading=document.createElement('div');heading.className='global-search-heading';heading.textContent='بحث شامل';panel.append(heading);
+  matches.forEach(item=>{const control=document.createElement(item.kind==='tool'?'button':'a');control.className='global-search-item';control.type=item.kind==='tool'?'button':undefined;if(item.kind==='tool')control.dataset.globalTool=item.id;else control.href=item.url;const title=document.createElement('strong');title.textContent=item.title;const desc=document.createElement('small');desc.textContent=item.desc;control.append(title,desc);panel.append(control)});
+ };
+ input.addEventListener('input',render);
+ panel.addEventListener('click',e=>{const button=e.target.closest('[data-global-tool]');if(button){openTool(button.dataset.globalTool);panel.hidden=true;input.blur()}});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.hidden=true});
+})();
+
 const themeBtn=document.getElementById('themeBtn');
 if(themeBtn){let savedTheme='dark';try{savedTheme=localStorage.getItem('adah-theme')||'dark'}catch{}if(savedTheme==='light')document.body.classList.add('light-theme');const syncTheme=()=>{const light=document.body.classList.contains('light-theme');themeBtn.innerHTML='<svg class="icon"><use href="icons.svg#i-'+(light?'moon':'sun')+'"/></svg>';themeBtn.setAttribute('aria-label',light?'تفعيل المظهر الداكن':'تفعيل المظهر الفاتح')};syncTheme();themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light-theme');try{localStorage.setItem('adah-theme',document.body.classList.contains('light-theme')?'light':'dark')}catch{}syncTheme()})}
 
