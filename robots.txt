@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://adah.tools/sitemap.xml
+
+Sitemap: https://adah.pages.dev/sitemap.xml
