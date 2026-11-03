@@ -1,96 +1,22 @@
 (()=>{'use strict';
 const dict={
-'الأدوات':'Tools','الأقسام':'Categories','مكتبة الأدوات':'Tools library','عن ADAH':'About ADAH','المساعدة':'Help','الرئيسية':'Home','الخصوصية':'Privacy','الشروط':'Terms','خريطة الموقع':'Sitemap','العودة للرئيسية':'Back to home','العودة إلى المكتبة':'Back to library',
-'عن ADAH':'About ADAH','المساعدة والأسئلة الشائعة':'Help & FAQ','خريطة الموقع':'Sitemap','سياسة الخصوصية':'Privacy policy','شروط الاستخدام':'Terms of use',
-'اكتب، رتّب، وأنجز.':'Write, organize, get things done.','حسابات يومية بلا تعقيد.':'Everyday calculations, made simple.','أمانك يبدأ من كلمة مرور قوية.':'Your security starts with a strong password.',
-'عداد الكلمات':'Word counter','منسّق JSON':'JSON formatter','مولّد كلمات المرور':'Password generator','الحاسبة السريعة':'Quick calculator','محول الوحدات':'Unit converter','حاسبة العمر':'Age calculator',
-'النصوص والكتابة':'Writing & text','الصور والتصميم':'Images & design','الملفات والمستندات':'Files & documents','الحساب والتحويل':'Calculation & conversion','الأمان والخصوصية':'Security & privacy','الإنترنت والشبكات':'Internet & networks','المطورون والتقنية':'Developers & technology','الإنتاجية والتنظيم':'Productivity & organization',
-'ابدأ الكتابة هنا...':'Start typing here...','نسخ النص':'Copy text','مسح النص':'Clear text','نسخ النتيجة':'Copy result','مسح الحقول':'Clear fields','افتح الأداة':'Open tool','استخدم الأداة':'Use tool','أداة مجانية':'Free tool','قريباً':'Coming soon',
-'هل أحتاج إلى حساب؟':'Do I need an account?','لا، الأدوات المتاحة حالياً لا تتطلب إنشاء حساب.':'No. Available tools currently do not require an account.','هل الأدوات مجانية؟':'Are the tools free?','هل تُرسل بياناتي إلى الخادم؟':'Is my data sent to a server?','هل يعمل الموقع دون إنترنت؟':'Does the site work offline?',
-'مبادئنا':'Our principles','التطوير':'Development','آخر تحديث: نوفمبر 2026':'Last updated: November 2026','اتفاق الاستخدام':'Terms of use','الشفافية والثقة':'Transparency & trust',
-'استكشاف جميع الأدوات':'Explore all tools','ثمانية مجالات منظمة لتصل إلى ما تحتاجه بسهولة.':'Eight organized areas to help you find what you need.',
-'أدوات عملية للتعامل مع النصوص والبيانات بسرعة، بتصميم واضح وتجربة عربية.':'Practical tools for text and data, with a clear experience.','مجموعة أدوات خفيفة للحساب والتحويل، تعمل مباشرة من متصفحك.':'Lightweight calculation and conversion tools that run in your browser.',
-'تتم المعالجة داخل متصفحك فقط.':'Processing happens only in your browser.','آخر تحديث':'Last updated','التواصل':'Contact'
+'الأدوات':'Tools','الأقسام':'Categories','مكتبة الأدوات':'Tools library','عن ADAH':'About ADAH','المساعدة':'Help','الرئيسية':'Home','الخصوصية':'Privacy','الشروط':'Terms','خريطة الموقع':'Sitemap','العودة للرئيسية':'Back to home','العودة إلى المكتبة':'Back to library','المساعدة والأسئلة الشائعة':'Help & FAQ','سياسة الخصوصية':'Privacy policy','شروط الاستخدام':'Terms of use','كل ما تحتاجه،':'Everything you need,','في مكان واحد.':'in one place.','كل ما تحتاجه، في مكان واحد.':'Everything you need, in one place.','منصة عربية للأدوات الرقمية المجانية، بتجربة استثنائية وتصميم فاخر.':'A free digital tools platform with a polished experience.','ابحث عن أداة...':'Search for a tool...','ابحث':'Search','تغيير المظهر':'Change appearance','تفعيل المظهر الداكن':'Enable dark theme','تفعيل المظهر الفاتح':'Enable light theme','أدوات متاحة حالياً':'Available tools','معالجة الأدوات على جهازك':'Tools processed on your device','بلا حساب':'No account needed','استخدم الأدوات مباشرة':'Use tools instantly','كل الأدوات':'All tools','أدوات في هذه النتيجة':'Tools in these results','إنجازك يبدأ':'Your work starts','من هنا.':'here.','اختر أداتك، ودع الباقي علينا.':'Choose a tool and let us handle the rest.','عداد الكلمات':'Word counter','منسّق JSON':'JSON formatter','مولّد كلمات المرور':'Password generator','الحاسبة السريعة':'Quick calculator','محول الوحدات':'Unit converter','حاسبة العمر':'Age calculator','النصوص والكتابة':'Writing & text','الصور والتصميم':'Images & design','الملفات والمستندات':'Files & documents','الحساب والتحويل':'Calculation & conversion','الأمان والخصوصية':'Security & privacy','الإنترنت والشبكات':'Internet & networks','المطورون والتقنية':'Developers & technology','الإنتاجية والتنظيم':'Productivity & organization','قريباً':'Coming soon','الكتابة ومعالجة النصوص':'Writing and text processing','الحساب والوحدات':'Calculations and units','أدوات الحماية والخصوصية':'Security and privacy tools','احسب الكلمات والحروف والمسافات في نصك فوراً.':'Count words, characters and spaces instantly.','رتّب بيانات JSON وتحقق من صحتها بسهولة.':'Format JSON and validate it easily.','أنشئ كلمات مرور قوية وعشوائية على جهازك.':'Generate strong random passwords on your device.','نفّذ العمليات الحسابية اليومية بسرعة ودقة.':'Perform everyday calculations quickly and accurately.','حوّل بين وحدات الطول والوزن ودرجات الحرارة.':'Convert length, weight and temperature units.','اعرف عمرك بالتفصيل انطلاقاً من تاريخ ميلادك.':'Calculate your age from your date of birth.','أقسام المنصة':'Platform categories','ثمانية مجالات منظمة لتصل إلى ما تحتاجه بسهولة.':'Eight organized areas to help you find what you need.','اكتب أو الصق النص هنا':'Type or paste your text here','كلمة':'Words','حرف':'Characters','حرف دون مسافات':'Characters without spaces','نسخ النص':'Copy text','مسح النص':'Clear text','نسخ النتيجة':'Copy result','مسح الحقول':'Clear fields','استخدم الأداة':'Use tool','افتح الأداة':'Open tool','أداة مجانية':'Free tool','بيانات JSON':'JSON data','تنسيق البيانات':'Format data','تصغير':'Minify','ستظهر النتيجة هنا.':'Your result will appear here.','تتم المعالجة داخل متصفحك فقط.':'Processing happens only in your browser.','طول كلمة المرور: ':'Password length: ','أحرف كبيرة':'Uppercase letters','أرقام':'Numbers','رموز':'Symbols','اضغط إنشاء لتوليد كلمة مرور.':'Press generate to create a password.','إنشاء كلمة مرور':'Generate password','نسخ':'Copy','أدخل العملية الحسابية':'Enter a calculation','احسب النتيجة':'Calculate','النتيجة ستظهر هنا.':'Your result will appear here.','نوع التحويل':'Conversion type','الطول':'Length','الوزن':'Weight','درجة الحرارة':'Temperature','القيمة':'Value','تحويل':'Convert','تاريخ الميلاد':'Date of birth','احسب عمري':'Calculate my age','أدخل تاريخ ميلادك لمعرفة عمرك.':'Enter your birth date to calculate your age.','اختر تاريخ ميلاد صحيحاً.':'Choose a valid birth date.','تم النسخ بنجاح':'Copied successfully','تعذر النسخ. حدّد النص وانسخه يدوياً':'Copy failed. Select and copy the text manually','أدخل قيمة رقمية صحيحة':'Enter a valid number','العملية غير صحيحة. استخدم الأرقام والعمليات والأقواس فقط.':'Invalid expression. Use numbers, operators and parentheses only.','لم نعثر على أداة بهذا الاسم. جرّب كلمة أخرى.':'No matching tool found. Try another search.','عن ADAH':'About ADAH','مبادئنا':'Our principles','التطوير':'Development','آخر تحديث: نوفمبر 2026':'Last updated: November 2026','اتفاق الاستخدام':'Terms of use','الشفافية والثقة':'Transparency & trust','هل أحتاج إلى حساب؟':'Do I need an account?','لا، الأدوات المتاحة حالياً لا تتطلب إنشاء حساب.':'No. Available tools currently do not require an account.','هل الأدوات مجانية؟':'Are the tools free?','هل تُرسل بياناتي إلى الخادم؟':'Is my data sent to a server?','هل يعمل الموقع دون إنترنت؟':'Does the site work offline?','عاد الاتصال بالإنترنت':'You are back online','أنت غير متصل. الأدوات المحلية ما زالت متاحة':'You are offline. Local tools remain available','إغلاق':'Close','بحث شامل':'Search all ADAH','صفحات وأقسام':'Pages and categories','لا توجد نتائج مطابقة':'No matching results','الأخبار والتحديثات':'News & updates','التعلم والمعرفة':'Learning & knowledge','الموارد والملفات':'Resources & files','الخدمات الرقمية':'Digital services','كل الحقوق محفوظة.':'All rights reserved.','تغيير أبعاد الصورة':'Resize image','اختر صورة من جهازك':'Choose an image from your device','العرض بالبكسل':'Width in pixels','الارتفاع بالبكسل':'Height in pixels','الحفاظ على تناسب الأبعاد':'Keep aspect ratio','تغيير الأبعاد':'Resize','اختر صورة لعرض أبعادها.':'Choose an image to view its dimensions.','الأبعاد الأصلية: ':'Original dimensions: ','بكسل':'pixels','تنزيل الصورة':'Download image','الملف المحدد ليس صورة.':'The selected file is not an image.','تعذر قراءة الصورة.':'Could not read the image.','تم تجهيز الصورة الجديدة: ':'New image is ready: ','أدخل أبعاداً بين 1 و12000 بكسل':'Enter dimensions between 1 and 12000 pixels','اختر صورة أولاً':'Choose an image first','تعذر تجهيز الصورة':'Could not prepare the image','بصمة الملفات':'File checksum','اختر ملفاً لحساب بصمته':'Choose a file to calculate its checksum','خوارزمية البصمة':'Hash algorithm','حساب البصمة':'Calculate checksum','تتم قراءة الملف محلياً في متصفحك.':'The file is read locally in your browser.','ميزة البصمة الآمنة غير متاحة في هذا السياق.':'Secure hashing is unavailable in this context.','جارٍ حساب البصمة...':'Calculating checksum...','تعذر حساب بصمة الملف.':'Could not calculate the file checksum.','ترميز Base64':'Base64 encoder','النص أو Base64':'Text or Base64','اكتب النص هنا...':'Enter text here...','ترميز':'Encode','فك الترميز':'Decode','يدعم النصوص العربية وUTF-8. تتم المعالجة محلياً.':'Supports Arabic and UTF-8. Processing is local.','النص ليس Base64 صالحاً أو لا يحتوي على UTF-8 صحيح.':'The text is not valid Base64 or does not contain valid UTF-8.','تحويل حالة النص':'Text case converter','النص المراد تحويله':'Text to convert','التحويل':'Conversion','أحرف إنجليزية كبيرة':'Uppercase English letters','أحرف إنجليزية صغيرة':'Lowercase English letters','أول حرف من كل كلمة كبير':'Capitalize each word','أول حرف في الجملة كبير':'Capitalize sentence starts','عكس ترتيب الأحرف':'Reverse character order','حوّل الأحرف الإنجليزية إلى كبيرة أو صغيرة أو غيّر ترتيب النص.':'Convert English letters to uppercase or lowercase, or reverse the text.','أدوات متاحة حالياً':'Available tools','أداة مجانية':'Free tool','استخدم الأداة':'Use tool','أَدَاة ADAH، منصة عربية للأدوات الرقمية المجانية بتجربة استثنائية وتصميم فاخر.':'ADAH, a digital platform offering free tools with a polished experience.','أَدَاة | ADAH · كل ما تحتاجه، في مكان واحد':'ADAH | Everything you need, in one place.'
+,'التعلم والمعرفة':'Learning & knowledge','مكتبة المعرفة':'Knowledge library','شروحات عملية تساعدك على فهم الأدوات الرقمية واستخدامها بأمان.':'Practical guides to help you understand and safely use digital tools.','كيف تعمل بصمة الملفات؟':'How do file checksums work?','خصوصية الصور عند تعديلها':'Image privacy when editing','كلمات المرور القوية':'Strong passwords','JSON للمبتدئين':'JSON for beginners','هذه الموضوعات صفحات تمهيدية ضمن مكتبة ADAH. سننشر الشروحات التفصيلية بعد مراجعتها، ولن ننسب معلومات إلى مصادر لم نتحقق منها.':'These are introductory topics in the ADAH knowledge library. Detailed guides will be published after review, with verified sourcing.','الموارد والملفات':'Resources & files','مكان منظم للملفات المرجعية والقوالب والمواد التي يمكن الاستفادة منها بأمان.':'A curated place for reference files, templates and useful materials.','أدلة الاستخدام':'User guides','أصول التصميم':'Design assets','قوالب ومستندات':'Templates and documents','لا توجد حالياً ملفات تنزيل منشورة في هذه المكتبة. لن نعرض روابط تنزيل وهمية، وستظهر هنا الملفات بعد فحص سلامتها وتحديد مصدرها وترخيصها.':'There are currently no published downloads in this library. We will not show fake download links. Files will appear after safety, source and license checks.','الخدمات الرقمية':'Digital services','خدمات رقمية بوضوح.':'Digital services, clearly explained.','نعرض هنا الخدمات التي توفرها المنصة فعلياً، مع توضيح طريقة المعالجة والقيود قبل الاستخدام.':'This page lists services actually provided by the platform, with processing methods and limitations explained.','لا نقدم حالياً خدمات حسابات سحابية أو تخزين ملفات أو فحص روابط عن بُعد. أي خدمة مستقبلية ستوضح تكلفتها وحدودها ومزودها قبل تفعيلها.':'We do not currently provide cloud accounts, file storage or remote link scanning. Future services will disclose their provider, costs and limits before activation.',
+'ترميز الروابط':'URL encoder / decoder','النص أو الرابط':'Text or URL','ترميز الرابط':'Encode URL','فك الترميز':'Decode','نسخ النتيجة':'Copy result','تعالج الأداة النص محلياً ولا تتصل بالموقع الموجود في الرابط.':'This tool processes text locally and does not connect to the URL.','تعذر ترميز النص':'Could not encode the text','ترميز الرابط غير صالح':'Invalid URL encoding','مولّد UUID':'UUID generator','عدد المعرّفات':'Number of IDs','إنشاء معرّفات':'Generate IDs','ستظهر المعرّفات هنا.':'Generated IDs will appear here.','نسخ النتائج':'Copy results','يستخدم المولد Web Crypto العشوائي الآمن.':'The generator uses secure Web Crypto randomness.','اختر عدداً بين 1 و50':'Choose a number between 1 and 50','التوليد الآمن غير متاح في هذا المتصفح':'Secure generation is unavailable in this browser','أدوات متاحة حالياً':'Available tools',
+'منظّم الأسطر':'Line organizer','النص أو القائمة':'Text or list','الصق كل عنصر في سطر مستقل...':'Paste each item on a separate line...','إزالة المسافات من أطراف الأسطر':'Trim whitespace around lines','حذف الأسطر الفارغة':'Remove empty lines','حذف الأسطر المكررة':'Remove duplicate lines','ترتيب الأسطر أبجدياً':'Sort lines alphabetically','تنظيم القائمة':'Organize list','لم تتم المعالجة بعد.':'Not processed yet.','عدد الأسطر بعد المعالجة: ':'Lines after processing: ','قائمة':'List','نظّف القوائم، واحذف الأسطر المكررة، ورتّبها أبجدياً.':'Clean lists, remove duplicate lines and sort alphabetically.'
 };
-"كل ما تحتاجه، ":"Everything you need, ",
-"في مكان واحد.":"in one place.",
-"منصة عربية للأدوات الرقمية المجانية، بتجربة استثنائية وتصميم فاخر.":"A free digital tools platform with a polished experience.",
-"ابحث عن أداة...":"Search for a tool...",
-"ابحث":"Search",
-"تغيير المظهر":"Change appearance",
-"أدوات متاحة حالياً":"Available tools",
-"معالجة الأدوات على جهازك":"Tools processed on your device",
-"بلا حساب":"No account needed",
-"استخدم الأدوات مباشرة":"Use tools instantly",
-"كل الأدوات":"All tools",
-"أدوات في هذه النتيجة":"Tools in these results",
-"إنجازك يبدأ ":"Your work starts ",
-"من هنا.":"here.",
-"اختر أداتك، ودع الباقي علينا.":"Choose a tool and let us handle the rest.",
-"احسب الكلمات والحروف والمسافات في نصك فوراً.":"Count words, characters and spaces instantly.",
-"رتّب بيانات JSON وتحقق من صحتها بسهولة.":"Format JSON and validate it easily.",
-"أنشئ كلمات مرور قوية وعشوائية على جهازك.":"Generate strong random passwords on your device.",
-"نفّذ العمليات الحسابية اليومية بسرعة ودقة.":"Perform everyday calculations quickly and accurately.",
-"حوّل بين وحدات الطول والوزن ودرجات الحرارة.":"Convert length, weight and temperature units.",
-"اعرف عمرك بالتفصيل انطلاقاً من تاريخ ميلادك.":"Calculate your age from your date of birth.",
-"منظومة ADAH":"The ADAH platform",
-"أقسام المنصة ":"Platform ",
-"كلها.":"categories.",
-"الكتابة ومعالجة النصوص":"Writing and text processing",
-"قريباً":"Coming soon",
-"فلسفتنا":"Our philosophy",
-"التقنية يجب أن ":"Technology should ",
-"تخدمك.":"work for you.",
-"اكتشف المكتبة":"Explore the library",
-"مساحة للأفكار ":"A space for ideas ",
-"والإنجاز.":"and progress.",
-"جميع الحقوق محفوظة.":"All rights reserved.",
-"اكتب أو الصق النص هنا":"Type or paste your text here",
-"كلمة":"Words",
-"حرف":"Characters",
-"حرف دون مسافات":"Characters without spaces",
-"وقت القراءة التقريبي: ":"Estimated reading time: ",
-"دقيقة":"min",
-"بيانات JSON":"JSON data",
-"تنسيق البيانات":"Format data",
-"تصغير":"Minify",
-"ستظهر النتيجة هنا.":"Your result will appear here.",
-"تتم المعالجة داخل متصفحك فقط.":"Processing happens only in your browser.",
-"طول كلمة المرور: ":"Password length: ",
-"أحرف كبيرة":"Uppercase letters",
-"أرقام":"Numbers",
-"رموز":"Symbols",
-"اضغط إنشاء لتوليد كلمة مرور.":"Press generate to create a password.",
-"إنشاء كلمة مرور":"Generate password",
-"نسخ":"Copy",
-"تُنشأ كلمة المرور باستخدام مولّد عشوائي آمن في المتصفح ولا تُرسل إلى أي مكان.":"Passwords are generated securely in your browser and are not sent anywhere.",
-"أدخل العملية الحسابية":"Enter a calculation",
-"احسب النتيجة":"Calculate",
-"النتيجة ستظهر هنا.":"The result will appear here.",
-"أدخل قيمة رقمية صحيحة":"Enter a valid number",
-"نوع التحويل":"Conversion type",
-"الطول":"Length",
-"الوزن":"Weight",
-"درجة الحرارة":"Temperature",
-"القيمة":"Value",
-"تحويل":"Convert",
-"تاريخ الميلاد":"Date of birth",
-"احسب عمري":"Calculate my age",
-"أدخل تاريخ ميلادك لمعرفة عمرك.":"Enter your birth date to calculate your age.",
-"اختر تاريخ ميلاد صحيحاً.":"Choose a valid birth date.",
-"تم النسخ بنجاح":"Copied successfully",
-"تعذر النسخ. حدّد النص وانسخه يدوياً":"Copy failed. Select and copy the text manually",
-"عاد الاتصال بالإنترنت":"You are back online",
-"أنت غير متصل. الأدوات المحلية ما زالت متاحة":"You are offline. Local tools remain available",
-"إغلاق":"Close",
-"كل ما تحتاجه، في مكان واحد.":"Everything you need, in one place.",
 const reverse=Object.fromEntries(Object.entries(dict).map(([a,b])=>[b,a]));
 const key='adah-language';let lang='ar';try{lang=localStorage.getItem(key)||'ar'}catch{}
-function translate(root=document.body){document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';document.querySelectorAll('[data-lang-switch]').forEach(b=>{b.textContent=lang==='ar'?'English':'العربية';b.setAttribute('aria-label',lang==='ar'?'Switch to English':'التبديل إلى العربية')});
-const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode()){const raw=n.nodeValue,trim=raw.trim();if(!trim)continue;const value=lang==='en'?dict[trim]:reverse[trim];if(value)n.nodeValue=raw.replace(trim,value)}
-root.querySelectorAll?.('[placeholder]').forEach(el=>{const v=lang==='en'?dict[el.placeholder]:reverse[el.placeholder];if(v)el.placeholder=v});
-root.querySelectorAll?.('[aria-label]').forEach(el=>{const v=lang==='en'?dict[el.getAttribute('aria-label')]:reverse[el.getAttribute('aria-label')];if(v)el.setAttribute('aria-label',v)});
+const tr=s=>lang==='en'?(dict[s]||s):(reverse[s]||s);
+function translate(root=document.body){
+document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+document.querySelectorAll('[data-lang-switch]').forEach(b=>{b.textContent=lang==='ar'?'English':'العربية';b.setAttribute('aria-label',lang==='ar'?'Switch to English':'التبديل إلى العربية')});
+const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while((n=walker.nextNode())){const raw=n.nodeValue,trim=raw.trim();if(!trim)continue;const value=tr(trim);if(value!==trim)n.nodeValue=raw.replace(trim,value)}
+root.querySelectorAll?.('[placeholder],[aria-label],[title]').forEach(el=>['placeholder','aria-label','title'].forEach(attr=>{const v=el.getAttribute(attr);if(v){const translated=tr(v);if(translated!==v)el.setAttribute(attr,translated)}}));
+if(root===document.body||root===document.documentElement){const title=document.querySelector('title');if(title)title.textContent=tr(title.textContent);const description=document.querySelector('meta[name="description"]');if(description)description.content=tr(description.content);const og=document.querySelector('meta[property="og:description"]');if(og)og.content=tr(og.content)}
 }
-document.addEventListener('click',e=>{const b=e.target.closest('[data-lang-switch]');if(!b)return;lang=lang==='ar'?'en':'ar';try{localStorage.setItem(key,lang)}catch{}location.reload()});
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.topbar').forEach(h=>{if(!h.querySelector('[data-lang-switch]')){const b=document.createElement('button');b.type='button';b.className='tool-btn secondary language-switch';b.dataset.langSwitch='';b.textContent=lang==='ar'?'English':'العربية';b.addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';try{localStorage.setItem(key,lang)}catch{}location.reload()});h.append(b)}});translate();const observer=new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node.nodeType===1)translate(node)});observer.observe(document.body,{childList:true,subtree:true})});
+function setLanguage(next){lang=next;try{localStorage.setItem(key,lang)}catch{}location.reload()}
+document.addEventListener('click',e=>{if(e.target.closest('[data-lang-switch]'))setLanguage(lang==='ar'?'en':'ar')});
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.topbar').forEach(h=>{if(!h.querySelector('[data-lang-switch]')){const b=document.createElement('button');b.type='button';b.className='tool-btn secondary language-switch';b.dataset.langSwitch='';b.textContent=lang==='ar'?'English':'العربية';h.append(b)}});translate();const observer=new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===1)translate(node)})));observer.observe(document.body,{childList:true,subtree:true});document.addEventListener('adah:translate',()=>translate())});
+window.ADAHI18N={get language(){return lang},translate:tr,refresh:()=>translate()};
 })();
