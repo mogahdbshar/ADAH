@@ -26,7 +26,7 @@ async function copy(t){if(!t)return;try{if(navigator.clipboard&&window.isSecureC
 function showToast(message){let toast=$('#appToast');if(!toast){toast=document.createElement('div');toast.id='appToast';toast.className='app-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');document.body.append(toast)}toast.textContent=message;toast.classList.add('visible');clearTimeout(window.__adahToastTimer);window.__adahToastTimer=setTimeout(()=>toast.classList.remove('visible'),2400)}
 $$('.open-tool').forEach(b=>b.addEventListener('click',()=>openTool(b.dataset.tool)));
 $('#closeModal').onclick=()=>{modal.hidden=true;document.body.style.overflow=''};modal.addEventListener('click',e=>{if(e.target===modal)$('#closeModal').click()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)$('#closeModal').click();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if($('#searchInput'))$('#searchInput').focus()}});
-// Language switching is intentionally omitted until a complete translated interface is available; a partial toggle mislabels Arabic content.
+// The shared i18n.js layer controls language and document direction.
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 window.addEventListener('online',()=>showToast('عاد الاتصال بالإنترنت'));window.addEventListener('offline',()=>showToast('أنت غير متصل. الأدوات المحلية ما زالت متاحة'));
 const searchGo=document.getElementById('searchGo');
