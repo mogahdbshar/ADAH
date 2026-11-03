@@ -124,3 +124,11 @@ button:disabled{filter:saturate(.4)}
 .tool-grid .card-tag{color:var(--accent,#f16a83)}
 .filter.active{border-color:rgba(240,85,117,.55)}
 .filter:disabled{text-decoration:none}
+
+
+/* Tool action groups */
+.tool-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px}
+.tool-actions .tool-btn{min-width:112px}
+.tool-actions .tool-btn.secondary{min-height:42px}
+.category-cards .tool-card .card-tag{color:var(--accent,#f16a83)}
+@media(max-width:520px){.tool-actions{display:grid;grid-template-columns:1fr 1fr}.tool-actions .tool-btn{width:100%;justify-content:center}}
