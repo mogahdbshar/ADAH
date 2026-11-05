@@ -1,8 +1,7 @@
 -- ADAH Phase 4: server-side administration foundations.
 -- Apply only to a newly provisioned D1 database after reviewing 0001_initial.sql.
 -- This migration is intentionally additive and stores only hashes for session/CSRF secrets.
-
-PRAGMA foreign_keys = ON;
+-- D1 enforces foreign keys automatically; do not toggle PRAGMA foreign_keys here.
 
 CREATE TABLE IF NOT EXISTS admin_sessions (
   id TEXT PRIMARY KEY,
