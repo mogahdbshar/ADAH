@@ -6,6 +6,7 @@ Status: repository preparation only. No Cloudflare account resource has been cre
 - The public site remains a static Cloudflare Pages project.
 - `migrations/0001_initial.sql` defines the first D1 content model but has not been applied to a live database.
 - GitHub Actions are not used.
+- Cloudflare Pages production auto-deploy is enabled for `main`; pushes to the phase branch create Preview deployments. Do not merge to `main` without explicit approval because that can publish automatically.
 - No Pages Functions API, D1 binding, R2 bucket, Access application, authentication provider or admin session service is currently configured.
 
 ## Phase 4 sequence
@@ -34,6 +35,7 @@ Status: repository preparation only. No Cloudflare account resource has been cre
 - `0002_admin_security_foundation.sql` is additive and assumes `0001_initial.sql` has already been applied.
 - It adds hashed admin sessions, content revision snapshots, rate-limit buckets and coarse login events.
 - The migration has not been applied to D1. SQL compatibility must be checked against the actual D1 runtime before use.
+- `migrations/0002_verification.sql` contains read-only schema/integrity checks and commented constraint probes for a disposable database. It is a verification aid, not a migration; do not run the commented probes against production.
 - Session cleanup requires a future scheduled Worker; no cron has been configured.
 
 ## Owner-only setup gate
