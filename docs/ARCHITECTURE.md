@@ -9,7 +9,8 @@ Status: implementation blueprint, not a claim that external services are connect
 - Future database: Cloudflare D1.
 - Future object storage: Cloudflare R2, only when resource uploads are implemented.
 - GitHub is source control. GitHub Actions remain unused.
-- Production deployment is manual and requires owner approval.
+- Cloudflare Pages production auto-deploy is currently enabled for `main`. Feature-branch commits create Preview deployments; merging to `main` can publish to production.
+- Production changes require explicit owner approval.
 
 ## Boundaries
 1. Public pages must never contain credentials, API tokens, database secrets, admin passwords or private diagnostics.
@@ -20,9 +21,9 @@ Status: implementation blueprint, not a claim that external services are connect
 6. Analytics must be privacy-minimizing and must not store raw sensitive input from tools.
 
 ## Deployment gates
-- Static Pages deployment must remain separate from production until preview review.
-- Pages auto-deploy must be verified disabled before any Git push intended only as source storage.
-- D1 bindings, secrets, Access policies and R2 buckets are account-level manual configuration gates.
+- Use feature-branch Preview deployments for review; do not merge to `main` without explicit owner approval.
+- Do not change the production branch or auto-deploy settings without explicit owner approval.
+- D1 bindings, secrets, Access policies and R2 buckets are account-level configuration gates.
 - Never create a production admin route that accepts an unverified shared password or trusts client-supplied roles.
 - No production deployment until the owner explicitly approves it.
 
