@@ -23,8 +23,13 @@ async function getJwks(teamDomain) {
 }
 
 export async function verifyAccessIdentity(request, env) {
-  const teamDomain = String(env.ACCESS_TEAM_DOMAIN || "").trim()
-    .replace(/^https?:/i, "").replace(/^\\/\\//, "").replace(/\\/+$/, "");
+  const rawTeamDomain = String(env.ACCESS_TEAM_DOMAIN || "").trim();
+  let teamDomain = "";
+  try {
+    const parsed = new URL(rawTeamDomain.includes("://") ? rawTeamDomain : `https://${rawTeamDomain}`);
+    if (parsed.protocol !== "https:" || parsed.pathname !== "/" || parsed.search || parsed.hash) return null;
+    teamDomain = parsed.host;
+  } catch { return null; }
   const audience = String(env.ACCESS_AUD || "").trim();
   const allowlist = String(env.ADMIN_EMAIL_ALLOWLIST || "").split(",")
     .map(value => value.trim().toLowerCase()).filter(Boolean);
