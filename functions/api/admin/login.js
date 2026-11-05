@@ -1,4 +1,4 @@
-import { jsonResponse, validSameOrigin, readBoundedJson, passwordHash, createAdminSession, enforceRateLimit, sha256 } from "../../_shared/access.js";
+import { jsonResponse, responseWithCookies, validSameOrigin, readBoundedJson, passwordHash, createAdminSession, enforceRateLimit, sha256 } from "../../_shared/access.js";
 export async function onRequestPost({request,env}) {
   if(!env.DB) return jsonResponse({error:"service_unavailable"},503);
   if(!validSameOrigin(request)) return jsonResponse({error:"invalid_origin"},403);
@@ -19,9 +19,7 @@ export async function onRequestPost({request,env}) {
     if(!valid) return jsonResponse({error:"invalid_credentials"},401);
     const session=await createAdminSession(env,admin.id);
     await env.DB.prepare("UPDATE admin_users SET last_login_at=CURRENT_TIMESTAMP WHERE id=?").bind(admin.id).run();
-    return new Response(JSON.stringify({authenticated:true,admin:{email:admin.email,name:admin.display_name||admin.email}}),{
-      status:200,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store","set-cookie":session["set-cookie"]}
-    });
+    return responseWithCookies({authenticated:true,admin:{email:admin.email,name:admin.display_name||admin.email}},200,session["set-cookie"]);
   } catch { return jsonResponse({error:"service_unavailable"},503); }
 }
 function constantTime(a,b){if(typeof a!=="string"||typeof b!=="string"||a.length!==b.length)return false;let x=0;for(let i=0;i<a.length;i++)x|=a.charCodeAt(i)^b.charCodeAt(i);return x===0;}
