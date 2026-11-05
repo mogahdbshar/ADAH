@@ -31,3 +31,11 @@ export async function onRequestPost({request,env}) {
     return new Response(JSON.stringify({created:true,authenticated:true}),{status:201,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store","set-cookie":session["set-cookie"]}});
   } catch { return jsonResponse({error:"service_unavailable"},503); }
 }
+
+export async function onRequestGet({env}) {
+  if(!env.DB) return jsonResponse({error:"service_unavailable"},503);
+  try {
+    const row=await env.DB.prepare("SELECT COUNT(*) AS count FROM admin_users").first();
+    return jsonResponse({needsSetup:(row?.count||0)===0,setupConfigured:Boolean(env.ADMIN_SETUP_SECRET&&String(env.ADMIN_SETUP_SECRET).length>=32)});
+  } catch { return jsonResponse({error:"service_unavailable"},503); }
+}
