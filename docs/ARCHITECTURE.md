@@ -6,7 +6,7 @@ Status: implementation blueprint, not a claim that external services are connect
 - Public site: Cloudflare Pages static assets.
 - Browser code: HTML, CSS and JavaScript. Existing stack is retained; no framework migration is introduced.
 - Future server-side API: Cloudflare Pages Functions / Workers.
-- Database: Cloudflare D1 staging database `adah-staging`, connected to Pages Functions through the `DB` binding. The binding alone does not activate database features; no migration or API route has been deployed.
+- Database: Cloudflare D1 staging database `adah-staging`, connected to Pages Functions through the `DB` binding. The two initial schema migrations are applied and verified on staging. No API route has been deployed or connected to visitor traffic.
 - Future object storage: Cloudflare R2, only when resource uploads are implemented.
 - GitHub is source control. GitHub Actions remain unused.
 - Cloudflare Pages production auto-deploy is currently enabled for `main`. Feature-branch commits create Preview deployments; merging to `main` can publish to production.
