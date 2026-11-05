@@ -18,19 +18,29 @@ export async function onRequestPost({ request, env }) {
     const role = await env.DB.prepare("SELECT id FROM roles WHERE name = 'admin' LIMIT 1").first();
     if (!role) return jsonResponse({ error: "roles_not_initialized" }, 503);
 
-    const result = await env.DB.prepare(`
-      INSERT INTO admin_users (id, external_subject, email, display_name)
-      SELECT ?, ?, ?, ?
-      WHERE NOT EXISTS (SELECT 1 FROM admin_users)
-      RETURNING id
-    `).bind(id, identity.subject, identity.email, identity.name || identity.email).run();
-
-    if (!result.success || result.meta?.changes !== 1) return jsonResponse({ error: "bootstrap_closed" }, 409);
-
-    await env.DB.batch([
-      env.DB.prepare("INSERT INTO admin_user_roles (admin_user_id, role_id) VALUES (?, ?)").bind(id, role.id),
-      env.DB.prepare("INSERT INTO audit_logs (id, admin_user_id, action, entity_type, entity_id) VALUES (?, ?, 'bootstrap_admin', 'admin_user', ?)").bind(crypto.randomUUID(), id, id)
+    const results = await env.DB.batch([
+      env.DB.prepare(`
+        INSERT INTO admin_users (id, external_subject, email, display_name)
+        SELECT ?, ?, ?, ?
+        WHERE NOT EXISTS (SELECT 1 FROM admin_users)
+      `).bind(id, identity.subject, identity.email, identity.name || identity.email),
+      env.DB.prepare(`
+        INSERT INTO admin_user_roles (admin_user_id, role_id)
+        SELECT id, ? FROM admin_users
+        WHERE id = ? AND external_subject = ?
+          AND (SELECT COUNT(*) FROM admin_users) = 1
+      `).bind(role.id, id, identity.subject),
+      env.DB.prepare(`
+        INSERT INTO audit_logs (id, admin_user_id, action, entity_type, entity_id)
+        SELECT ?, id, 'bootstrap_admin', 'admin_user', id
+        FROM admin_users WHERE id = ? AND external_subject = ?
+          AND EXISTS (SELECT 1 FROM admin_user_roles WHERE admin_user_id = ? AND role_id = ?)
+      `).bind(crypto.randomUUID(), id, identity.subject, id, role.id)
     ]);
+
+    if (results[0]?.meta?.changes !== 1 || results[1]?.meta?.changes !== 1) {
+      return jsonResponse({ error: "bootstrap_closed" }, 409);
+    }
     return jsonResponse({ created: true, message: "Initial administrator enrolled." }, 201);
   } catch {
     return jsonResponse({ error: "service_unavailable" }, 503);
