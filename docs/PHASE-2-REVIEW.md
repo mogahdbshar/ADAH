@@ -11,6 +11,8 @@
 - Search is a local index over rendered tool cards, not a server-wide search service.
 - English translation is dictionary-based and does not yet guarantee complete translation of every dynamic tool message or every page.
 - Some tool logic required deeper source-level checks; Phase 3 corrects calculator decimal parsing, line-ending normalization and line splitting, and adds the three newer public sections to the global search index.
+- Additional Phase 3 hardening validates malformed/future birth dates, rejects temperatures below absolute zero, limits local image resizing to 25 MB and hashing to 50 MB, revokes generated image download URLs on dialog close, and adds keyboard focus management to tool dialogs.
+- These changes have passed source syntax checks only; the expanded manual checklist remains unverified until browser testing is performed.
 
 ## Explicitly not implemented
 - No authenticated administration system.
