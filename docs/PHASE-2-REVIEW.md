@@ -10,6 +10,7 @@
 - The home page currently exposes 13 tools. Tool behavior still requires hands-on browser verification across supported devices.
 - Search is a local index over rendered tool cards, not a server-wide search service.
 - English translation is dictionary-based and does not yet guarantee complete translation of every dynamic tool message or every page.
+- Some tool logic required deeper source-level checks; Phase 3 corrects calculator decimal parsing, line-ending normalization and line splitting, and adds the three newer public sections to the global search index.
 
 ## Explicitly not implemented
 - No authenticated administration system.
