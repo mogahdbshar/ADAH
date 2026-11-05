@@ -24,7 +24,7 @@ async function getJwks(teamDomain) {
 
 export async function verifyAccessIdentity(request, env) {
   const teamDomain = String(env.ACCESS_TEAM_DOMAIN || "").trim()
-    .replace(/^https?:\\/\\//i, "").replace(/\\/$/, "");
+    .replace(/^https?:/i, "").replace(/^\\/\\//, "").replace(/\\/+$/, "");
   const audience = String(env.ACCESS_AUD || "").trim();
   const allowlist = String(env.ADMIN_EMAIL_ALLOWLIST || "").split(",")
     .map(value => value.trim().toLowerCase()).filter(Boolean);
