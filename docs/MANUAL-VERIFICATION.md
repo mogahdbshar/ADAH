@@ -13,6 +13,8 @@ Use this checklist on the Cloudflare branch preview before requesting production
 - [ ] Search for Arabic text with and without tashkeel, hamza variants and taa marbuta; verify expected matching without unrelated matches.
 - [ ] Open every tool from its card and direct `?tool=` link; verify closing and reopening does not retain stale object URLs or output state.
 - [ ] Switch language on the home page and each content page; inspect dynamic validation, toast and error messages as well as static labels.
+- [ ] Open each tool after switching to English; confirm labels, placeholders, select options, notices and dynamically inserted modal content are translated.
+- [ ] Switch back to Arabic and confirm the original Arabic text and RTL layout are restored without mixed-language fragments.
 - [ ] Search by Arabic title, Arabic partial term and English term.
 - [ ] Confirm empty results are explained and clearing search restores results.
 - [ ] Exercise every tool with valid, empty, malformed and boundary inputs.
