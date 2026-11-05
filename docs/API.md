@@ -17,6 +17,8 @@ Every route below requires a valid Cloudflare Access JWT, exact owner email allo
 - `GET /api/admin/content`: tools, categories, pages and translations.
 - `PATCH /api/admin/content`: bounded status, category, ordering and translation edits. Each edit records a revision snapshot and audit event.
 - `GET /api/admin/moderation`: pending ratings and active reports.
+- `GET /api/admin/audit?limit=50&offset=0`: protected audit history for administrators and viewers.
+- `GET /api/admin/revisions?type=tool&id=...`: revision snapshots for one content item.
 - `PATCH /api/admin/moderation`: approve/reject ratings and progress/resolve/dismiss reports.
 
 No password login, browser-trusted roles, arbitrary SQL endpoint, public content-write route or file upload exists.
