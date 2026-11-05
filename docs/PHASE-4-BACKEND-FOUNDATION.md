@@ -1,6 +1,6 @@
 # Phase 4: backend and administration foundation
 
-Status: repository preparation only. No Cloudflare account resource has been created or connected.
+Status: D1 staging database `adah-staging` has been created by the owner and connected to the Pages project as the `DB` binding. Both ordered migrations have now been applied directly to `adah-staging`; integrity and foreign-key checks passed. No production data/API behavior has been changed.
 
 ## Confirmed repository state
 - The public site remains a static Cloudflare Pages project.
@@ -40,4 +40,4 @@ Status: repository preparation only. No Cloudflare account resource has been cre
 - Session cleanup requires a future scheduled Worker; no cron has been configured.
 
 ## Owner-only setup gate
-The next external step requires the owner to sign in to Cloudflare and confirm the current Pages project and account plan. Do not request passwords, API tokens or MFA codes in chat. Use a supported, least-privilege connection if available; otherwise provide exact dashboard steps at that stage.
+The owner has completed the D1 staging database creation and Pages binding. The next implementation step is to build and test the Pages Functions API against the staging binding. Do not connect public or admin functionality to this database until authentication and authorization are implemented and tested. Do not request passwords, API tokens or MFA codes in chat.
