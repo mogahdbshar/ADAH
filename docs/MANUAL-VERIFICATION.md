@@ -16,6 +16,9 @@ Use this checklist on the Cloudflare branch preview before requesting production
 - [ ] Search by Arabic title, Arabic partial term and English term.
 - [ ] Confirm empty results are explained and clearing search restores results.
 - [ ] Exercise every tool with valid, empty, malformed and boundary inputs.
+- [ ] Calculator: test integers, decimals, leading decimals, negative values, parentheses, percentages, division by zero and malformed expressions.
+- [ ] Line organizer: test LF and CRLF files, empty lines, duplicate lines, Arabic sorting and text with trailing spaces.
+- [ ] Global search: verify Learning, Resources and Services pages appear alongside all 13 tools.
 - [ ] Confirm copy, clear and download controls give accurate feedback.
 - [ ] For file-based tools, confirm the browser does not upload selected files.
 - [ ] Test on a secure context for Web Crypto-dependent functions.
