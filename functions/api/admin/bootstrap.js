@@ -1,4 +1,4 @@
-import { jsonResponse, validSameOrigin, readBoundedJson, passwordHash, randomHex, constantTimeEqual, enforceRateLimit, createAdminSession } from "../../_shared/access.js";
+import { jsonResponse, responseWithCookies, validSameOrigin, readBoundedJson, passwordHash, randomHex, constantTimeEqual, enforceRateLimit, createAdminSession } from "../../_shared/access.js";
 export async function onRequestPost({request,env}) {
   if(!env.DB) return jsonResponse({error:"service_unavailable"},503);
   if(!env.ADMIN_SETUP_SECRET||String(env.ADMIN_SETUP_SECRET).length<32) return jsonResponse({error:"setup_not_configured"},503);
@@ -28,7 +28,7 @@ export async function onRequestPost({request,env}) {
     ]);
     if(results[0]?.meta?.changes!==1||results[1]?.meta?.changes!==1) return jsonResponse({error:"bootstrap_closed"},409);
     const session=await createAdminSession(env,id);
-    return new Response(JSON.stringify({created:true,authenticated:true}),{status:201,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store","set-cookie":session["set-cookie"]}});
+    return responseWithCookies({created:true,authenticated:true},201,session["set-cookie"]);
   } catch { return jsonResponse({error:"service_unavailable"},503); }
 }
 
