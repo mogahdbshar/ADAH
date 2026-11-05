@@ -29,7 +29,11 @@ Use this checklist on the Cloudflare branch preview before requesting production
 - [ ] Test narrow Android viewport, tablet and desktop widths.
 - [ ] Navigate with keyboard only and verify visible focus.
 - [ ] Check labels, accessible names, contrast, zoom and reduced-motion preference.
-- [ ] Confirm dialogs can be closed and focus is restored.
+- [ ] Confirm dialogs receive focus when opened, keep Tab navigation inside, close with Escape and restore focus to the opening control.
+- [ ] Image resizing: reject non-image files and files over 25 MB; confirm generated download links are revoked when the dialog closes.
+- [ ] File hashing: reject files over 50 MB with a clear message and confirm no file upload occurs.
+- [ ] Unit conversion: reject temperatures below absolute zero in Celsius, Fahrenheit and Kelvin.
+- [ ] Age calculator: reject invalid, future and malformed dates.
 
 ## Offline and release
 - [ ] Load once online, then test the documented offline pages.
