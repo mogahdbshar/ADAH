@@ -10,10 +10,10 @@ export async function onRequestPost({request,env}) {
     const password=typeof body.password==="string"?body.password:"";
     if(!email||!password||password.length>256) return jsonResponse({error:"invalid_credentials"},401);
     const admin=await env.DB.prepare("SELECT id,email,display_name,password_salt,password_hash,password_iterations,is_active FROM admin_users WHERE lower(email)=? LIMIT 1").bind(email).first();
-    let valid=false;
-    if(admin?.is_active===1&&admin.password_salt&&admin.password_hash&&admin.password_iterations) {
-      valid=constantTime(await passwordHash(password,admin.password_salt,admin.password_iterations),admin.password_hash);
-    }
+    const salt=admin?.password_salt||"00000000000000000000000000000000";
+    const iterations=admin?.password_iterations||310000;
+    const candidate=await passwordHash(password,salt,iterations);
+    const valid=Boolean(admin?.is_active===1&&admin.password_hash&&constantTime(candidate,admin.password_hash));
     await env.DB.prepare("INSERT INTO admin_login_events(id,subject_hash,outcome,coarse_reason) VALUES(?,?,?,?)")
       .bind(crypto.randomUUID(),await sha256(email),valid?"success":"denied",valid?"password":"invalid_credentials").run();
     if(!valid) return jsonResponse({error:"invalid_credentials"},401);
