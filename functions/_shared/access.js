@@ -85,3 +85,9 @@ export async function requireAdmin(request,env,allowedRoles=["admin"]) {
     return {ok:true,sessionId:row.session_id,admin:{id:row.id,email:row.email,name:row.display_name||row.email,roles}};
   } catch { return {ok:false,response:json({error:"service_unavailable"},503)}; }
 }
+
+export function responseWithCookies(body,status,cookies) {
+  const headers=new Headers({"content-type":"application/json; charset=utf-8","cache-control":"no-store","x-content-type-options":"nosniff","referrer-policy":"no-referrer"});
+  for(const value of cookies||[]) headers.append("Set-Cookie",value);
+  return new Response(JSON.stringify(body),{status,headers});
+}
