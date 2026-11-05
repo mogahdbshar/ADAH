@@ -1,5 +1,6 @@
 -- ADAH initial schema. Apply only after D1 is provisioned and reviewed.
-PRAGMA foreign_keys = ON;
+-- D1 enforces foreign keys automatically; changing PRAGMA foreign_keys inside
+-- a D1 migration is not supported and is intentionally omitted.
 
 CREATE TABLE IF NOT EXISTS admin_users (
   id TEXT PRIMARY KEY,
