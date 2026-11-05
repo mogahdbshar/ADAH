@@ -1,7 +1,7 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 if($('#year'))$('#year').textContent=new Date().getFullYear();
 let currentFilter='all';
-const normalizeSearch=value=>String(value||'').toLocaleLowerCase('ar').normalize('NFKC').replace(/[\\u064B-\\u065F\\u0670\\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/ة/g,'ه').replace(/[^\\p{L}\\p{N}]+/gu,' ').trim();
+const normalizeSearch=value=>String(value||'').toLocaleLowerCase('ar').normalize('NFKC').replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/ة/g,'ه').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 function filterTools(){if(!$('#searchInput'))return;const q=normalizeSearch($('#searchInput').value);let count=0;$$('.tool-card').forEach(card=>{const ok=(currentFilter==='all'||(currentFilter==='utility'?card.dataset.category==='utility':card.dataset.category===currentFilter))&&(!q||normalizeSearch(card.dataset.search+' '+card.innerText).includes(q));card.hidden=!ok;if(ok)count++});$('#emptyState').hidden=count!==0;$('#toolCount').textContent=String(count).padStart(2,'0')}
 if($('#searchInput'))$('#searchInput').addEventListener('input',filterTools);
 if($('#searchInput'))$('#searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#tools')?.scrollIntoView({behavior:'smooth',block:'start'})});
