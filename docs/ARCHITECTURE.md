@@ -6,7 +6,7 @@ Status: implementation blueprint, not a claim that external services are connect
 - Public site: Cloudflare Pages static assets.
 - Browser code: HTML, CSS and JavaScript. Existing stack is retained; no framework migration is introduced.
 - Future server-side API: Cloudflare Pages Functions / Workers.
-- Future database: Cloudflare D1.
+- Database: Cloudflare D1 staging database `adah-staging`, connected to Pages Functions through the `DB` binding. The binding alone does not activate database features; no migration or API route has been deployed.
 - Future object storage: Cloudflare R2, only when resource uploads are implemented.
 - GitHub is source control. GitHub Actions remain unused.
 - Cloudflare Pages production auto-deploy is currently enabled for `main`. Feature-branch commits create Preview deployments; merging to `main` can publish to production.
@@ -23,7 +23,7 @@ Status: implementation blueprint, not a claim that external services are connect
 ## Deployment gates
 - Use feature-branch Preview deployments for review; do not merge to `main` without explicit owner approval.
 - Do not change the production branch or auto-deploy settings without explicit owner approval.
-- D1 bindings, secrets, Access policies and R2 buckets are account-level configuration gates.
+- D1 production database, secrets, Access policies and R2 buckets are account-level configuration gates. The current `DB` binding points to staging and must not be treated as production data storage.
 - Never create a production admin route that accepts an unverified shared password or trusts client-supplied roles.
 - No production deployment until the owner explicitly approves it.
 
