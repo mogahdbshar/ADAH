@@ -31,19 +31,19 @@ INSERT OR IGNORE INTO translations (id,entity_type,entity_id,locale,field_name,v
 ('tr-cat-productivity-en','category','cat-productivity','en','title','Productivity & organization');
 
 INSERT OR IGNORE INTO tools (id,slug,category_id,route,icon_key,status,is_local_only,version) VALUES
-('tool-counter','word-counter','cat-text','/#tool-counter','type','?tool=counter','published',1,1),
-('tool-json','json-formatter','cat-text','/#tool-json','code','?tool=json','published',1,1),
-('tool-password','password-generator','cat-security','/#tool-password','shield','?tool=password','published',1,1),
-('tool-calculator','quick-calculator','cat-utility','/#tool-calculator','calculator','?tool=calculator','published',1,1),
-('tool-converter','unit-converter','cat-utility','/#tool-converter','arrows','?tool=converter','published',1,1),
-('tool-age','age-calculator','cat-utility','/#tool-age','clock','?tool=age','published',1,1),
-('tool-image','image-resizer','cat-images','/#tool-image','image','?tool=image','published',1,1),
-('tool-filehash','file-checksum','cat-files','/#tool-filehash','file','?tool=filehash','published',1,1),
-('tool-base64','base64-codec','cat-developer','/#tool-base64','code','?tool=base64','published',1,1),
-('tool-textcase','text-case','cat-productivity','/#tool-textcase','type','?tool=textcase','published',1,1),
-('tool-urlcodec','url-codec','cat-network','/#tool-urlcodec','link','?tool=urlcodec','published',1,1),
-('tool-uuid','uuid-generator','cat-developer','/#tool-uuid','code','?tool=uuid','published',1,1),
-('tool-lines','line-organizer','cat-productivity','/#tool-lines','list','?tool=lines','published',1,1);
+('tool-counter','word-counter','cat-text','?tool=counter','type','published',1,1),
+('tool-json','json-formatter','cat-text','?tool=json','code','published',1,1),
+('tool-password','password-generator','cat-security','?tool=password','shield','published',1,1),
+('tool-calculator','quick-calculator','cat-utility','?tool=calculator','calculator','published',1,1),
+('tool-converter','unit-converter','cat-utility','?tool=convert','arrows','published',1,1),
+('tool-age','age-calculator','cat-utility','?tool=age','clock','published',1,1),
+('tool-image','image-resizer','cat-images','?tool=image','image','published',1,1),
+('tool-filehash','file-checksum','cat-files','?tool=filehash','file','published',1,1),
+('tool-base64','base64-codec','cat-developer','?tool=base64','code','published',1,1),
+('tool-textcase','text-case','cat-productivity','?tool=textcase','type','published',1,1),
+('tool-urlcodec','url-codec','cat-network','?tool=urlcodec','link','published',1,1),
+('tool-uuid','uuid-generator','cat-developer','?tool=uuid','code','published',1,1),
+('tool-lines','line-organizer','cat-productivity','?tool=lines','list','published',1,1);
 
 INSERT OR IGNORE INTO translations (id,entity_type,entity_id,locale,field_name,value) VALUES
 ('tr-tool-counter-ar-title','tool','tool-counter','ar','title','عداد الكلمات'),
