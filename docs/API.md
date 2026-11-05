@@ -1,26 +1,33 @@
-# ADAH read-only API foundation
+# ADAH API
 
-## Routes
+All endpoints are Cloudflare Pages Functions and use the `DB` D1 binding.
 
-### `GET /api/health`
-Returns a minimal readiness response after a successful D1 round trip. It does not expose account IDs, database names, SQL errors or runtime details.
+## Public read endpoints
 
-### `GET /api/catalog?lang=ar|en&limit=50&offset=0`
-Returns only published categories and tools. Language defaults to Arabic unless the request's `Accept-Language` begins with English. `limit` is capped at 100 and invalid values fall back to safe defaults. The endpoint is read-only and returns a short-lived public cache response.
+- `GET /api/health`: minimal D1 readiness check.
+- `GET /api/catalog?lang=ar|en&limit=50&offset=0`: published categories and tools only. Arabic is the default; limit is capped at 100.
 
-## Runtime
-- Cloudflare Pages Functions use the existing `DB` D1 binding.
-- No client-provided identity, role or permission is trusted.
-- No write endpoint, admin endpoint, upload endpoint or authentication bypass is implemented in this phase.
-- API errors are generic and do not reveal SQL, schema or provider details.
-- The browser must continue to work if the API is unavailable; the static catalogue remains the fallback until frontend integration is separately reviewed.
+## Protected administration endpoints
 
-## Preview validation
-1. Open `/api/health`; expect HTTP 200 and `ok: true`.
-2. Open `/api/catalog?lang=ar`; verify Arabic titles and only published entries.
-3. Open `/api/catalog?lang=en`; verify English titles.
-4. Try `limit=999999`; the response must be capped at 100.
-5. Confirm there are no POST/PUT/PATCH/DELETE handlers.
-6. Confirm API failures return a generic 503 response without SQL details.
+Every route below requires a valid Cloudflare Access JWT, exact owner email allowlisting, an active matching `admin_users.external_subject` record and an assigned role. Missing configuration denies access.
 
-Do not merge this phase to `main` without explicit production-release approval. The Pages project automatically deploys `main`.
+- `GET /api/admin/session`: verified administrator identity and roles.
+- `POST /api/admin/bootstrap`: one-time first-admin enrollment, only while the administrator table is empty.
+- `GET /api/admin/overview`: content and moderation counts.
+- `GET /api/admin/content`: tools, categories, pages and translations.
+- `PATCH /api/admin/content`: bounded status, category, ordering and translation edits. Each edit records a revision snapshot and audit event.
+- `GET /api/admin/moderation`: pending ratings and active reports.
+- `PATCH /api/admin/moderation`: approve/reject ratings and progress/resolve/dismiss reports.
+
+No password login, browser-trusted roles, arbitrary SQL endpoint, public content-write route or file upload exists.
+
+## Security properties
+
+- Access JWT signatures are verified using RS256 and the team's published public keys.
+- Issuer, audience, expiration, subject and exact email allowlist are checked.
+- Admin membership and role are resolved from D1 on every request.
+- Mutations require same-origin JSON requests.
+- Errors are generic and responses are not cached.
+- Content revisions and audit records are stored server-side.
+
+See `ADMIN-ACCESS-SETUP.md` before administrator enrollment. The current production Pages binding points to `adah-staging`; confirm the intended database and backup plan before enabling administration.
