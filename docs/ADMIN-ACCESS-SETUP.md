@@ -3,7 +3,7 @@
 Administration is deny-by-default. The API does not implement password login and never trusts identity or roles supplied by browser code.
 
 ## Cloudflare Access
-Create a self-hosted Access application for the ADAH hostname and protect `/api/admin/*`. Restrict the allow policy to the owner's exact identity and require MFA. Protect any custom hostname separately. The API expects Cloudflare's `CF-Access-Jwt-Assertion` header.
+Create a self-hosted Access application for the ADAH hostname and protect both `/admin.html` and `/api/admin/*` on the `adah.pages.dev` hostname. If the Access dashboard requires separate self-hosted applications for page and API paths, create both with the same owner-only allow policy and MFA requirement. Restrict the allow policy to the owner's exact identity and require MFA. Protect any custom hostname separately. The API expects Cloudflare's `CF-Access-Jwt-Assertion` header.
 
 ## Pages runtime variables
 Configure these runtime variables in the Pages project:
