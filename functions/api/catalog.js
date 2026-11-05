@@ -39,7 +39,7 @@ export async function onRequestGet({ request, env }) {
         ORDER BY c.sort_order ASC, c.slug ASC
       `).bind(locale).all(),
       env.DB.prepare(`
-        SELECT t.id, t.slug, t.route, t.icon_key, t.version,
+        SELECT t.id, t.slug, t.icon_key, t.version,
           c.slug AS category,
           (SELECT value FROM translations
            WHERE entity_type = 'tool' AND entity_id = t.id
