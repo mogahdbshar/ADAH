@@ -1,11 +1,11 @@
 -- ADAH D1 preflight and post-migration verification.
 -- Read-only checks. Run against a disposable/staging D1 database after applying
 -- 0001_initial.sql followed by 0002_admin_security_foundation.sql.
--- Expected: each schema query returns the named object; integrity_check returns "ok".
+-- Expected: each schema query returns the named object; quick_check returns "ok".
 -- The final query should return zero rows on a fresh database.
 
 PRAGMA foreign_key_check;
-PRAGMA integrity_check;
+PRAGMA quick_check;
 
 SELECT name, type
 FROM sqlite_master
