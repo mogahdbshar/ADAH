@@ -2,9 +2,14 @@
 
 ## Current confirmed scope
 - Public static website with Arabic default and English interface support.
-- Twelve local browser tools are listed in the phase 2 pull request.
+- Thirteen local browser tools are listed in the phase 2 pull request.
 - Learning, Resources and Services public information pages exist.
 - Local search and service-worker caching remain static/browser-side.
+
+## Current limitations to keep visible
+- The home page currently exposes 13 tools. Tool behavior still requires hands-on browser verification across supported devices.
+- Search is a local index over rendered tool cards, not a server-wide search service.
+- English translation is dictionary-based and does not yet guarantee complete translation of every dynamic tool message or every page.
 
 ## Explicitly not implemented
 - No authenticated administration system.
