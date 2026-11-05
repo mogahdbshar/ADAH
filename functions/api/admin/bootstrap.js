@@ -7,6 +7,13 @@ export async function onRequestPost({ request, env }) {
     return jsonResponse({ error: "unsupported_media_type" }, 415);
   }
 
+  let body;
+  try { body = await readBoundedJson(request, 1000); }
+  catch { return jsonResponse({ error: "invalid_request" }, 400); }
+  if (!body || typeof body !== "object" || Array.isArray(body) || Object.keys(body).length !== 0) {
+    return jsonResponse({ error: "invalid_request" }, 400);
+  }
+
   const identity = await verifyAccessIdentity(request, env);
   if (!identity) return jsonResponse({ error: "unauthorized" }, 401);
 
