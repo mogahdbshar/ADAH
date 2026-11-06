@@ -19,4 +19,25 @@ $("#logoutAdmin").addEventListener("click",async()=>{try{await request("/api/adm
 $("#refreshAdmin").addEventListener("click",refresh);$("#reloadContent").addEventListener("click",()=>loadContent().catch(()=>showMessage("تعذر تحميل المحتوى.",true)));$("#reloadModeration").addEventListener("click",()=>loadModeration().catch(()=>showMessage("تعذر تحميل المراجعات.",true)));$("#reloadAudit").addEventListener("click",()=>loadAudit().catch(()=>showMessage("تعذر تحميل سجل العمليات.",true)));
 $("#contentRows").addEventListener("click",async event=>{const button=event.target.closest("[data-save-type]");if(!button)return;const type=button.dataset.saveType,id=button.dataset.saveId,select=$('[data-status-type="'+CSS.escape(type)+'"][data-status-id="'+CSS.escape(id)+'"]');button.disabled=true;try{await request("/api/admin/content",{method:"PATCH",body:JSON.stringify({type,id,locale:"ar",changes:{status:select.value},change_note:"تحديث حالة المحتوى من لوحة الإدارة"})});showMessage("تم حفظ التغيير مع تسجيل نسخة مراجعة.");await loadOverview()}catch{showMessage("تعذر حفظ التغيير.",true)}finally{button.disabled=false}});
 $("#moderationItems").addEventListener("click",async event=>{const button=event.target.closest("[data-mod-kind]");if(!button)return;button.disabled=true;try{await request("/api/admin/moderation",{method:"PATCH",body:JSON.stringify({kind:button.dataset.modKind,id:button.dataset.modId,status:button.dataset.modStatus})});showMessage("تم تحديث حالة المراجعة وتسجيل العملية.");await Promise.all([loadModeration(),loadOverview()])}catch{showMessage("تعذر تحديث المراجعة.",true)}finally{button.disabled=false}});
-refresh();
+async function prepareAdminRuntime(){
+  try{
+    if(sessionStorage.getItem("adah-sw-reset-v1")==="done") return true;
+    sessionStorage.setItem("adah-sw-reset-v1","done");
+    if("serviceWorker" in navigator){
+      const registrations=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.map(registration=>registration.unregister()));
+    }
+    if("caches" in window){
+      const keys=await caches.keys();
+      await Promise.all(keys.filter(key=>key.startsWith("adah-static-")).map(key=>caches.delete(key)));
+    }
+    const url=new URL(location.href);
+    url.searchParams.set("runtime-reset","1");
+    location.replace(url.toString());
+    return false;
+  }catch{
+    showMessage("تعذر تنظيف ذاكرة الموقع. افتح لوحة الإدارة في نافذة خاصة.",true);
+    return false;
+  }
+}
+prepareAdminRuntime().then(ready=>{if(ready)refresh()});
