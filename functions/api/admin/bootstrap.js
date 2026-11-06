@@ -12,7 +12,7 @@ export async function onRequestPost({request,env}) {
   if(!validSameOrigin(request)) return jsonResponse({error:"invalid_origin"},403);
   if(!request.headers.get("content-type")?.toLowerCase().includes("application/json")) return jsonResponse({error:"unsupported_media_type"},415);
   try {
-    if(!await enforceRateLimit(env,request,"admin-bootstrap",3,3600)) return jsonResponse({error:"rate_limited"},429);
+    if(!await enforceRateLimit(env,request,"admin-bootstrap-v2",5,300)) return jsonResponse({error:"rate_limited"},429);
     const body=await readBoundedJson(request,5000);
     const secret=typeof body.setupSecret==="string"?body.setupSecret:"";
     const email=typeof body.email==="string"?body.email.trim().toLowerCase().slice(0,254):"";
