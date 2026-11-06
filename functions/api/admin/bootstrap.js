@@ -2,7 +2,9 @@ import { jsonResponse, responseWithCookies, validSameOrigin, readBoundedJson, pa
 
 function getBootstrapSecrets(env) {
   return [env.ADMIN_BOOTSTRAP_SECRET, env.ADMIN_SETUP_SECRET]
-    .filter(value => typeof value === "string" && value.length >= 32);
+    .filter(value => typeof value === "string")
+    .map(value => value.trim())
+    .filter(value => value.length >= 32);
 }
 
 export async function onRequestPost({request,env}) {
@@ -14,7 +16,7 @@ export async function onRequestPost({request,env}) {
   try {
     if(!await enforceRateLimit(env,request,"admin-bootstrap-v2",5,300)) return jsonResponse({error:"rate_limited"},429);
     const body=await readBoundedJson(request,5000);
-    const secret=typeof body.setupSecret==="string"?body.setupSecret:"";
+    const secret=typeof body.setupSecret==="string"?body.setupSecret.trim():"";
     const email=typeof body.email==="string"?body.email.trim().toLowerCase().slice(0,254):"";
     const name=typeof body.name==="string"?body.name.trim().slice(0,100):"";
     const password=typeof body.password==="string"?body.password:"";
