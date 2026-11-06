@@ -1,4 +1,4 @@
-import { jsonResponse, responseWithCookies, validSameOrigin, readBoundedJson, passwordHash, createAdminSession, enforceRateLimit, sha256 } from "../../_shared/access.js";
+import { jsonResponse, responseWithCookies, validSameOrigin, readBoundedJson, passwordHash, PASSWORD_HASH_ITERATIONS, createAdminSession, enforceRateLimit, sha256 } from "../../_shared/access.js";
 export async function onRequestPost({request,env}) {
   if(!env.DB) return jsonResponse({error:"service_unavailable"},503);
   if(!validSameOrigin(request)) return jsonResponse({error:"invalid_origin"},403);
@@ -11,7 +11,7 @@ export async function onRequestPost({request,env}) {
     if(!email||!password||password.length>256) return jsonResponse({error:"invalid_credentials"},401);
     const admin=await env.DB.prepare("SELECT id,email,display_name,password_salt,password_hash,password_iterations,is_active FROM admin_users WHERE lower(email)=? LIMIT 1").bind(email).first();
     const salt=admin?.password_salt||"00000000000000000000000000000000";
-    const iterations=admin?.password_iterations||310000;
+    const iterations=admin?.password_iterations||PASSWORD_HASH_ITERATIONS;
     const candidate=await passwordHash(password,salt,iterations);
     const valid=Boolean(admin?.is_active===1&&admin.password_hash&&constantTime(candidate,admin.password_hash));
     await env.DB.prepare("INSERT INTO admin_login_events(id,subject_hash,outcome,coarse_reason) VALUES(?,?,?,?)")
