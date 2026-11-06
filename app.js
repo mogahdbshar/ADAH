@@ -45,14 +45,24 @@ async function copy(t){if(!t)return;try{if(navigator.clipboard&&window.isSecureC
 function showToast(message){let toast=$('#appToast');if(!toast){toast=document.createElement('div');toast.id='appToast';toast.className='app-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');document.body.append(toast)}toast.textContent=message;toast.classList.add('visible');clearTimeout(window.__adahToastTimer);window.__adahToastTimer=setTimeout(()=>toast.classList.remove('visible'),2400)}
 // Expose one guarded entry point and use delegated clicks so every card remains functional.
 window.ADAHOpenTool=openTool;
-document.addEventListener('click',event=>{
- const trigger=event.target.closest('.open-tool');
- if(!trigger)return;
- const id=trigger.dataset.tool||trigger.dataset.globalTool;
+// Bind each visible tool button directly, with a capture-phase fallback for mobile browsers.
+function activateToolButton(trigger){
+ const id=trigger?.dataset?.tool;
  if(!id)return;
- event.preventDefault();
  try{openTool(id)}catch(error){console.error('ADAH tool failed:',error);showToast('تعذر فتح الأداة. أعد تحميل الصفحة وحاول مجدداً')}
+}
+$('.open-tool').forEach(trigger=>{
+ trigger.type='button';
+ trigger.addEventListener('click',event=>{event.preventDefault();activateToolButton(trigger)});
 });
+document.addEventListener('click',event=>{
+ const target=event.target instanceof Element?event.target:null;
+ const trigger=target?.closest('.open-tool');
+ if(!trigger)return;
+ event.preventDefault();
+ if(!modal.hidden)return;
+ activateToolButton(trigger);
+},true);
 $('#closeModal').onclick=()=>{const download=$('#downloadImage');if(download?.dataset.url){URL.revokeObjectURL(download.dataset.url);delete download.dataset.url;download.removeAttribute('href')}modal.hidden=true;document.body.style.overflow='';if(modalReturnFocus?.isConnected)modalReturnFocus.focus();modalReturnFocus=null};modal.addEventListener('click',e=>{if(e.target===modal)$('#closeModal').click()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)$('#closeModal').click();if(e.key==='Tab'&&!modal.hidden){const focusable=[...modal.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(el=>!el.hidden);if(focusable.length){const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if($('#searchInput'))$('#searchInput').focus()}});
 // The shared i18n.js layer controls language and document direction.
 // Service workers are intentionally disabled. ADAH always loads current files from the network.
