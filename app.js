@@ -53,7 +53,7 @@ function activateToolButton(trigger){
 }
 $('.open-tool').forEach(trigger=>{
  trigger.type='button';
- trigger.addEventListener('click',event=>{event.preventDefault();activateToolButton(trigger)});
+ trigger.addEventListener('click',event=>{event.preventDefault();if(modal.hidden)activateToolButton(trigger)});
 });
 document.addEventListener('click',event=>{
  const target=event.target instanceof Element?event.target:null;
