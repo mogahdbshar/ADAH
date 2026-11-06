@@ -43,7 +43,16 @@ if(id==='lines'){const input=$('#linesInput'),result=$('#linesResult');$('#proce
 
 async function copy(t){if(!t)return;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t)}else{const el=document.createElement('textarea');el.value=t;el.style.position='fixed';el.style.opacity='0';document.body.append(el);el.select();const ok=document.execCommand('copy');el.remove();if(!ok)throw new Error('copy failed')}showToast('تم النسخ بنجاح')}catch{showToast('تعذر النسخ. حدّد النص وانسخه يدوياً')}} 
 function showToast(message){let toast=$('#appToast');if(!toast){toast=document.createElement('div');toast.id='appToast';toast.className='app-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');document.body.append(toast)}toast.textContent=message;toast.classList.add('visible');clearTimeout(window.__adahToastTimer);window.__adahToastTimer=setTimeout(()=>toast.classList.remove('visible'),2400)}
-$$('.open-tool').forEach(b=>b.addEventListener('click',()=>openTool(b.dataset.tool)));
+// Expose one guarded entry point and use delegated clicks so every card remains functional.
+window.ADAHOpenTool=openTool;
+document.addEventListener('click',event=>{
+ const trigger=event.target.closest('.open-tool,[data-global-tool]');
+ if(!trigger)return;
+ const id=trigger.dataset.tool||trigger.dataset.globalTool;
+ if(!id)return;
+ event.preventDefault();
+ try{openTool(id)}catch(error){console.error('ADAH tool failed:',error);showToast('تعذر فتح الأداة. أعد تحميل الصفحة وحاول مجدداً')}
+});
 $('#closeModal').onclick=()=>{const download=$('#downloadImage');if(download?.dataset.url){URL.revokeObjectURL(download.dataset.url);delete download.dataset.url;download.removeAttribute('href')}modal.hidden=true;document.body.style.overflow='';if(modalReturnFocus?.isConnected)modalReturnFocus.focus();modalReturnFocus=null};modal.addEventListener('click',e=>{if(e.target===modal)$('#closeModal').click()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)$('#closeModal').click();if(e.key==='Tab'&&!modal.hidden){const focusable=[...modal.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(el=>!el.hidden);if(focusable.length){const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if($('#searchInput'))$('#searchInput').focus()}});
 // The shared i18n.js layer controls language and document direction.
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
