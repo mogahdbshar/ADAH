@@ -46,7 +46,7 @@ function showToast(message){let toast=$('#appToast');if(!toast){toast=document.c
 // Expose one guarded entry point and use delegated clicks so every card remains functional.
 window.ADAHOpenTool=openTool;
 document.addEventListener('click',event=>{
- const trigger=event.target.closest('.open-tool,[data-global-tool]');
+ const trigger=event.target.closest('.open-tool');
  if(!trigger)return;
  const id=trigger.dataset.tool||trigger.dataset.globalTool;
  if(!id)return;
