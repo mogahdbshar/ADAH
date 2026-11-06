@@ -30,7 +30,9 @@ export const clearAdminCookies=()=>[
   "adah_csrf=; Path=/; Max-Age=0; Secure; SameSite=Strict"
 ];
 export const randomHex=(length=16)=>hex(crypto.getRandomValues(new Uint8Array(length)));
-// Cloudflare Workers Web Crypto rejects PBKDF2 iteration counts above 100,000.\nexport const PASSWORD_HASH_ITERATIONS=100000;\nexport async function passwordHash(password,saltHex,iterations=PASSWORD_HASH_ITERATIONS) {
+// Cloudflare Workers Web Crypto rejects PBKDF2 iteration counts above 100,000.
+export const PASSWORD_HASH_ITERATIONS=100000;
+export async function passwordHash(password,saltHex,iterations=PASSWORD_HASH_ITERATIONS) {
   const salt=new Uint8Array((saltHex.match(/.{2}/g)||[]).map(x=>parseInt(x,16)));
   const key=await crypto.subtle.importKey("raw",enc.encode(password),"PBKDF2",false,["deriveBits"]);
   return hex(await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt,iterations},key,256));
