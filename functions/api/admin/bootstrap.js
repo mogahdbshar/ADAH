@@ -1,4 +1,4 @@
-import { jsonResponse, responseWithCookies, validSameOrigin, readBoundedJson, passwordHash, randomHex, constantTimeEqual, enforceRateLimit, createAdminSession } from "../../_shared/access.js";
+import { jsonResponse, responseWithCookies, validSameOrigin, readBoundedJson, passwordHash, PASSWORD_HASH_ITERATIONS, randomHex, constantTimeEqual, enforceRateLimit, createAdminSession } from "../../_shared/access.js";
 
 function getBootstrapSecrets(env) {
   return [env.ADMIN_BOOTSTRAP_SECRET, env.ADMIN_SETUP_SECRET]
@@ -32,7 +32,7 @@ export async function onRequestPost({request,env}) {
     const role=await env.DB.prepare("SELECT id FROM roles WHERE name='admin' LIMIT 1").first();
     if(!role) return jsonResponse({error:"roles_not_initialized"},503);
     stage="generate_password_salt";
-    const id=crypto.randomUUID(),salt=randomHex(16),iterations=310000;
+    const id=crypto.randomUUID(),salt=randomHex(16),iterations=PASSWORD_HASH_ITERATIONS;
     stage="import_password_key";
     const passwordKey=await crypto.subtle.importKey("raw",new TextEncoder().encode(password),"PBKDF2",false,["deriveBits"]);
     stage="derive_password_bits";
