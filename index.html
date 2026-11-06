@@ -1,5 +1,21 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head>
+<html lang="ar" dir="rtl"><head><script>
+(()=>{try{
+ const flag='__adah_sw_cleanup';
+ const url=new URL(location.href);
+ if(url.searchParams.has(flag)){url.searchParams.delete(flag);history.replaceState(null,'',url.pathname+url.search+url.hash);return}
+ if(!('serviceWorker'in navigator))return;
+ Promise.all([navigator.serviceWorker.getRegistrations(),caches.keys()]).then(async([registrations,keys])=>{
+  const oldKeys=keys.filter(key=>key.startsWith('adah-static-'));
+  if(!registrations.length&&!oldKeys.length)return;
+  await Promise.all(registrations.map(registration=>registration.unregister()));
+  await Promise.all(oldKeys.map(key=>caches.delete(key)));
+  url.searchParams.set(flag,'1');
+  location.replace(url.href);
+ }).catch(()=>{});
+ }catch(error){console.warn('ADAH cache cleanup skipped',error)}
+})();
+</script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050507"><meta name="description" content="أَدَاة ADAH، منصة عربية للأدوات الرقمية المجانية بتجربة استثنائية وتصميم فاخر.">
 <meta property="og:title" content="أَدَاة | ADAH"><meta property="og:description" content="كل ما تحتاجه، في مكان واحد.">
