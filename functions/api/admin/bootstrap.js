@@ -24,7 +24,7 @@ export async function onRequestPost({request,env}) {
     const password=typeof body.password==="string"?body.password:"";
     stage="verify_setup_secret";
     if(!setupSecrets.some(candidate=>constantTimeEqual(secret,candidate))) return jsonResponse({error:"invalid_setup"},403);
-    if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)||password.length<14||password.length>256) return jsonResponse({error:"invalid_input"},400);
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||password.length<14||password.length>256) return jsonResponse({error:"invalid_input"},400);
     stage="check_existing_admin";
     const count=await env.DB.prepare("SELECT COUNT(*) AS count FROM admin_users").first();
     if((count?.count||0)!==0) return jsonResponse({error:"bootstrap_closed"},409);
