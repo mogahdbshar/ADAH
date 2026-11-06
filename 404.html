@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
+<head><script>
+(()=>{try{
+ const flag='__adah_sw_cleanup';const url=new URL(location.href);
+ if(url.searchParams.has(flag)){url.searchParams.delete(flag);history.replaceState(null,'',url.pathname+url.search+url.hash);return}
+ if(!('serviceWorker'in navigator))return;
+ Promise.all([navigator.serviceWorker.getRegistrations(),caches.keys()]).then(async([regs,keys])=>{
+  const old=keys.filter(key=>key.startsWith('adah-static-'));
+  if(!regs.length&&!old.length)return;
+  await Promise.all(regs.map(reg=>reg.unregister()));
+  await Promise.all(old.map(key=>caches.delete(key)));
+  url.searchParams.set(flag,'1');location.replace(url.href);
+ }).catch(()=>{});
+ }catch(e){}
+})();
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#050507">
