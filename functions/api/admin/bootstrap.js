@@ -1,7 +1,14 @@
 import { jsonResponse, responseWithCookies, validSameOrigin, readBoundedJson, passwordHash, randomHex, constantTimeEqual, enforceRateLimit, createAdminSession } from "../../_shared/access.js";
+
+function getBootstrapSecret(env) {
+  return [env.ADMIN_SETUP_SECRET, env.ADMIN_BOOTSTRAP_SECRET]
+    .find(value => typeof value === "string" && value.length >= 32) || "";
+}
+
 export async function onRequestPost({request,env}) {
   if(!env.DB) return jsonResponse({error:"service_unavailable"},503);
-  if(!env.ADMIN_SETUP_SECRET||String(env.ADMIN_SETUP_SECRET).length<32) return jsonResponse({error:"setup_not_configured"},503);
+  const setupSecret=getBootstrapSecret(env);
+  if(!setupSecret) return jsonResponse({error:"setup_not_configured"},503);
   if(!validSameOrigin(request)) return jsonResponse({error:"invalid_origin"},403);
   if(!request.headers.get("content-type")?.toLowerCase().includes("application/json")) return jsonResponse({error:"unsupported_media_type"},415);
   try {
@@ -11,8 +18,8 @@ export async function onRequestPost({request,env}) {
     const email=typeof body.email==="string"?body.email.trim().toLowerCase().slice(0,254):"";
     const name=typeof body.name==="string"?body.name.trim().slice(0,100):"";
     const password=typeof body.password==="string"?body.password:"";
-    if(!constantTimeEqual(secret,env.ADMIN_SETUP_SECRET)) return jsonResponse({error:"invalid_setup"},403);
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||password.length<14||password.length>256) return jsonResponse({error:"invalid_input"},400);
+    if(!constantTimeEqual(secret,setupSecret)) return jsonResponse({error:"invalid_setup"},403);
+    if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)||password.length<14||password.length>256) return jsonResponse({error:"invalid_input"},400);
     const count=await env.DB.prepare("SELECT COUNT(*) AS count FROM admin_users").first();
     if((count?.count||0)!==0) return jsonResponse({error:"bootstrap_closed"},409);
     const role=await env.DB.prepare("SELECT id FROM roles WHERE name='admin' LIMIT 1").first();
@@ -36,6 +43,6 @@ export async function onRequestGet({env}) {
   if(!env.DB) return jsonResponse({error:"service_unavailable"},503);
   try {
     const row=await env.DB.prepare("SELECT COUNT(*) AS count FROM admin_users").first();
-    return jsonResponse({needsSetup:(row?.count||0)===0,setupConfigured:Boolean(env.ADMIN_SETUP_SECRET&&String(env.ADMIN_SETUP_SECRET).length>=32)});
+    return jsonResponse({needsSetup:(row?.count||0)===0,setupConfigured:Boolean(getBootstrapSecret(env))});
   } catch { return jsonResponse({error:"service_unavailable"},503); }
 }
