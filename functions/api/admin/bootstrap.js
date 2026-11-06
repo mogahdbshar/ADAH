@@ -43,6 +43,8 @@ export async function onRequestGet({env}) {
   if(!env.DB) return jsonResponse({error:"service_unavailable"},503);
   try {
     const row=await env.DB.prepare("SELECT COUNT(*) AS count FROM admin_users").first();
-    return jsonResponse({needsSetup:(row?.count||0)===0,setupConfigured:Boolean(getBootstrapSecret(env))});
+    const setup=typeof env.ADMIN_SETUP_SECRET==="string"?env.ADMIN_SETUP_SECRET:"";
+    const alternate=typeof env.ADMIN_BOOTSTRAP_SECRET==="string"?env.ADMIN_BOOTSTRAP_SECRET:"";
+    return jsonResponse({needsSetup:(row?.count||0)===0,setupConfigured:Boolean(getBootstrapSecret(env)),bindingDiagnostics:{ADMIN_SETUP_SECRET:setup.length>=32?"ready":setup.length>0?"too_short":"missing",ADMIN_BOOTSTRAP_SECRET:alternate.length>=32?"ready":alternate.length>0?"too_short":"missing"}});
   } catch { return jsonResponse({error:"service_unavailable"},503); }
 }
