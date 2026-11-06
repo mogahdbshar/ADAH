@@ -48,7 +48,7 @@ export async function onRequestPost({request,env}) {
     return responseWithCookies({created:true,authenticated:true},201,session["set-cookie"]);
   } catch (error) {
     console.error("admin_bootstrap_failed",stage,error?.name||"Error");
-    return jsonResponse({error:"bootstrap_internal_error",stage},503);
+    const safeReason=["OperationError","NotSupportedError","TypeError","DataError","QuotaExceededError","InvalidAccessError"].includes(error?.name)?error.name:"OtherError"; return jsonResponse({error:"bootstrap_internal_error",stage,reason:safeReason},503);
   }
 }
 
