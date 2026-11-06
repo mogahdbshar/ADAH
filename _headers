@@ -8,6 +8,9 @@
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 
+/admin.html
+  Cache-Control: no-store, no-cache, must-revalidate
+
 /admin.js
   Cache-Control: no-store, no-cache, must-revalidate
 
